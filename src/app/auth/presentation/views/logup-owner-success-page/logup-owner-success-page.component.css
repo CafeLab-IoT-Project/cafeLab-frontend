@@ -22,7 +22,7 @@ body{margin:0;padding:0}
   right:0;
   width:60%;
   height:100%;
-  background-image: url('/assets/logup-owner.png');
+  background-image: var(--bg-image);
   background-size:cover;    
   background-position:left center;
   background-repeat:no-repeat;

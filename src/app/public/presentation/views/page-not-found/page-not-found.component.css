@@ -9,7 +9,7 @@
 
 .pnf-background {
   min-height: calc(100vh - 64px);
-  background-image: url('/assets/fondo_planes.png');
+  background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
   display: flex;
