@@ -9,7 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy": "ng build --configuration production && firebase deploy --only hosting",
-    "deploy:hosting": "firebase deploy --only hosting"
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:ghpages": "ng build --configuration production --base-href /cafeLab-frontend/ && npx angular-cli-ghpages --dir=dist/cafe-lab/browser"
   },
   "prettier": {
     "printWidth": 100,
