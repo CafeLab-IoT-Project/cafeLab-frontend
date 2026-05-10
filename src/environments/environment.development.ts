@@ -1,6 +1,10 @@
+/**
+ * Desarrollo local: `ng serve` usa esta configuración (ver angular.json → development).
+ * Levanta el backend IoT en el mismo puerto (por defecto 8080, ver application-dev.properties).
+ */
 export const environment = {
   production: false,
-  serverBaseUrl: 'https://cafelab-euafbrgfdja5e0h9.canadacentral-01.azurewebsites.net',
+  serverBaseUrl: 'http://localhost:8080',
   coffeeLotsEndpointPath: '/api/v1/coffee-lots',
   suppliersEndpointPath: '/api/v1/suppliers',
   roastProfileEndpointPath: '/api/v1/roast-profile',
@@ -15,6 +19,7 @@ export const environment = {
   contactUsEndpointPath: '/contact-us',
   calibrationsEndpointPath: '/api/v1/calibrations',
   coastEndpointPath: '/api/v1/coast-productions',
-  inventoryEndpointPath: '/api/v1/inventory-entries'
+  inventoryEndpointPath: '/api/v1/inventory-entries',
+  productionCostRecordsEndpointPath: '/api/v1/production-cost-records'
 };
 
