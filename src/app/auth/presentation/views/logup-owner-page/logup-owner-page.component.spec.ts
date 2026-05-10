@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LogupOwnerPageComponent } from './logup-owner-page.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { provideRouter } from '@angular/router';
+
 
 describe('LogupOwnerPageComponent', () => {
   let component: LogupOwnerPageComponent;
@@ -8,9 +12,16 @@ describe('LogupOwnerPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LogupOwnerPageComponent]
-    })
-    .compileComponents();
+      imports: [
+        LogupOwnerPageComponent,
+        TranslateModule.forRoot()
+      ],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([])
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LogupOwnerPageComponent);
     component = fixture.componentInstance;

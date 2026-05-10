@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { Support } from './support';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('Support', () => {
   let component: Support;
@@ -8,9 +8,12 @@ describe('Support', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Support]
+      imports: [
+        Support,
+        TranslateModule.forRoot()
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(Support);
     component = fixture.componentInstance;

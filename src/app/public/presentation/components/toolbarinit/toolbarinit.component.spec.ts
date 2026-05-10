@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ToolbarinitComponent } from './toolbarinit.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { provideRouter } from '@angular/router';
 
 describe('ToolbarinitComponent', () => {
   let component: ToolbarinitComponent;
@@ -8,9 +9,15 @@ describe('ToolbarinitComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ToolbarinitComponent]
+      imports: [
+        ToolbarinitComponent,
+        TranslateModule.forRoot()
+      ],
+      providers: [
+        provideRouter([])
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ToolbarinitComponent);
     component = fixture.componentInstance;

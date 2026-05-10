@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LogupBaristaSuccessPageComponent } from './logup-barista-success-page.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { provideRouter } from '@angular/router';
 
 describe('LogupBaristaSuccessPageComponent', () => {
   let component: LogupBaristaSuccessPageComponent;
@@ -8,9 +9,15 @@ describe('LogupBaristaSuccessPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LogupBaristaSuccessPageComponent]
+      imports: [
+        LogupBaristaSuccessPageComponent,
+        TranslateModule.forRoot()
+      ],
+      providers: [
+        provideRouter([])
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(LogupBaristaSuccessPageComponent);
     component = fixture.componentInstance;

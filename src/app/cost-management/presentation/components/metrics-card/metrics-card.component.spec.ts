@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MetricsCardComponent } from './metrics-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('MetricsCardComponent', () => {
   let component: MetricsCardComponent;
@@ -8,9 +8,12 @@ describe('MetricsCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MetricsCardComponent]
+      imports: [
+        MetricsCardComponent,
+        TranslateModule.forRoot()
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MetricsCardComponent);
     component = fixture.componentInstance;
