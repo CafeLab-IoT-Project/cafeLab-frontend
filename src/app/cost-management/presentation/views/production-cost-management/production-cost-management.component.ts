@@ -37,6 +37,7 @@ import { CoffeeLot } from '../../../../coffee-lot/domain/model/coffee-lot.entity
 import { ProductionCostRecordApi } from '../../../../production-cost-record/application/production-cost-record.api';
 import { finalize } from 'rxjs';
 import { getUserFacingApiMessage } from '../../../../shared/infrastructure/api-error-message';
+import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
 
 type ModuleMode = 'list' | 'wizard';
 
@@ -106,6 +107,7 @@ export class ProductionCostPageComponent implements OnInit {
     private productionCostService: ProductionCostService,
     private coffeeLotApi: CoffeeLotApi,
     private productionCostRecordApi: ProductionCostRecordApi,
+    private dashboardNavigation: DashboardNavigationService,
   ) {
     this.firstFormGroup = this.fb.group({
       selectedLot: ['', Validators.required],
@@ -638,24 +640,7 @@ export class ProductionCostPageComponent implements OnInit {
   }
 
   goToHome(): void {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      this.router.navigate(['/login']);
-      return;
-    }
-    switch (user.plan) {
-      case 'barista':
-        this.router.navigate(['/dashboard/barista']);
-        break;
-      case 'owner':
-        this.router.navigate(['/dashboard/owner']);
-        break;
-      case 'full':
-        this.router.navigate(['/dashboard/complete']);
-        break;
-      default:
-        this.router.navigate(['/']);
-    }
+    this.dashboardNavigation.goToHome();
   }
 
 }

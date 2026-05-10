@@ -18,6 +18,7 @@ import { Recipe } from '../../../domain/model/recipe.entity';
 import { CreatePortfolioDialogComponent } from '../../components/create-portfolio-dialog/create-portfolio-dialog.component';
 import { ToolbarComponent } from '../../../../public/presentation/components/toolbar/toolbar.component';
 import { AuthService } from '../../../../auth/infrastructure/AuthService';
+import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -51,6 +52,7 @@ export class RecipeListComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private authService: AuthService,
+    private dashboardNavigation: DashboardNavigationService,
   ) {}
 
   ngOnInit(): void {
@@ -115,27 +117,6 @@ export class RecipeListComponent implements OnInit {
   }
 
   goToHome(): void {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      void this.router.navigate(['/login']);
-      return;
-    }
-    if (user.home) {
-      void this.router.navigate([user.home]);
-      return;
-    }
-    switch (user.plan) {
-      case 'barista':
-        void this.router.navigate(['/dashboard/barista']);
-        break;
-      case 'owner':
-        void this.router.navigate(['/dashboard/owner']);
-        break;
-      case 'full':
-        void this.router.navigate(['/dashboard/complete']);
-        break;
-      default:
-        void this.router.navigate(['/']);
-    }
+    this.dashboardNavigation.goToHome();
   }
 }

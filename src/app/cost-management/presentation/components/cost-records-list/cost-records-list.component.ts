@@ -15,16 +15,22 @@ import type {
 } from '../../../domain/model/production-cost.entity';
 import { getUserFacingApiMessage } from '../../../../shared/infrastructure/api-error-message';
 
-/** Opciones predefinidas del selector de motivos de anulación. */
+/**
+ * Opciones predefinidas del selector de motivos de anulación.
+ *
+ * `value` es el texto canónico (en español) que persistimos en el backend, así no
+ * cambia al alternar el idioma del front. `labelKey` es la clave i18n que se usa
+ * para mostrar la opción al usuario en su idioma activo.
+ */
 const PREDEFINED_REASONS = [
-  'Datos erróneos',
-  'Lote equivocado',
-  'Registro duplicado',
-  'Costos incompletos',
-  'Cancelación operativa',
-  'Proveedor no disponible',
-  'Error de cálculo',
-  'Error de transporte',
+  { value: 'Datos erróneos',          labelKey: 'COST_MANAGEMENT.RECORDS.ANNUL.REASONS.DATA_ERROR' },
+  { value: 'Lote equivocado',         labelKey: 'COST_MANAGEMENT.RECORDS.ANNUL.REASONS.WRONG_LOT' },
+  { value: 'Registro duplicado',      labelKey: 'COST_MANAGEMENT.RECORDS.ANNUL.REASONS.DUPLICATE' },
+  { value: 'Costos incompletos',      labelKey: 'COST_MANAGEMENT.RECORDS.ANNUL.REASONS.INCOMPLETE_COSTS' },
+  { value: 'Cancelación operativa',   labelKey: 'COST_MANAGEMENT.RECORDS.ANNUL.REASONS.OPERATIONAL_CANCEL' },
+  { value: 'Proveedor no disponible', labelKey: 'COST_MANAGEMENT.RECORDS.ANNUL.REASONS.SUPPLIER_UNAVAILABLE' },
+  { value: 'Error de cálculo',        labelKey: 'COST_MANAGEMENT.RECORDS.ANNUL.REASONS.CALCULATION_ERROR' },
+  { value: 'Error de transporte',     labelKey: 'COST_MANAGEMENT.RECORDS.ANNUL.REASONS.TRANSPORT_ERROR' },
 ] as const;
 
 const OTHER_REASON_KEY = '__OTHER__';
@@ -111,6 +117,20 @@ export class CostRecordsListComponent implements OnInit {
 
   isAnnulled(row: ProductionCostRecord): boolean {
     return row.status === 'anulado';
+  }
+
+  /**
+   * Devuelve el motivo de anulación listo para mostrar:
+   * - Si coincide con uno de los motivos predefinidos lo traduce al idioma activo.
+   * - Si no, asume que es un texto libre ("Otro") y lo devuelve tal cual.
+   */
+  displayReason(rawReason: string | null | undefined): string {
+    const value = (rawReason || '').trim();
+    if (!value) {
+      return '';
+    }
+    const match = PREDEFINED_REASONS.find((option) => option.value === value);
+    return match ? this.translate.instant(match.labelKey) : value;
   }
 
   statusLabelKey(status: ProductionCostRecordStatus | string): string {

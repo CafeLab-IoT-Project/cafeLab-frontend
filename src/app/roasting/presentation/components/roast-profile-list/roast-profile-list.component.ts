@@ -12,6 +12,7 @@ import { CoffeeLotApi } from '../../../../coffee-lot/application/coffee-lot.api'
 import { AuthService } from '../../../../auth/infrastructure/AuthService';
 import type { ApiError } from '../../../../shared/infrastructure/base-api-endpoint';
 import { getUserFacingApiMessage } from '../../../../shared/infrastructure/api-error-message';
+import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
 
 @Component({
   selector: 'app-roast-profile-list',
@@ -66,6 +67,7 @@ export class RoastProfileListComponent implements OnInit {
     private readonly router: Router,
     private readonly authService: AuthService,
     private readonly translate: TranslateService,
+    private readonly dashboardNavigation: DashboardNavigationService,
   ) {}
 
   ngOnInit(): void {
@@ -724,28 +726,7 @@ export class RoastProfileListComponent implements OnInit {
   }
 
   goToHome(): void {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      void this.router.navigate(['/login']);
-      return;
-    }
-    if (user.home) {
-      void this.router.navigate([user.home]);
-      return;
-    }
-    switch (user.plan) {
-      case 'barista':
-        void this.router.navigate(['/dashboard/barista']);
-        break;
-      case 'owner':
-        void this.router.navigate(['/dashboard/owner']);
-        break;
-      case 'full':
-        void this.router.navigate(['/dashboard/complete']);
-        break;
-      default:
-        void this.router.navigate(['/']);
-    }
+    this.dashboardNavigation.goToHome();
   }
 
   refreshRoastProfiles(): void {

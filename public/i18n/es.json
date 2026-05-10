@@ -231,7 +231,8 @@
       "DEFECT_LIBRARY": "Librería de Defectos",
       "ROAST_FLAVOR_CORRELATION": "Correlación Tueste-Sabor",
       "GRIND_CALIBRATION": "Calibración de Molienda",
-      "BREW_RECIPES": "Recetas"
+      "BREW_RECIPES": "Recetas",
+      "MONITORING": "Monitoreo"
     }
   },
   "CONTACT": {
@@ -319,7 +320,8 @@
     "GRIND_CALIBRATION": "Calibración de molienda",
     "BREW_RECIPES": "Bebidas y recetas",
     "RECIPE_VIEW": "Receta",
-    "PORTFOLIO_VIEW": "Portafolio"
+    "PORTFOLIO_VIEW": "Portafolio",
+    "MONITORING": "Monitoreo"
   },
   "SEARCH": {
     "PLACEHOLDER": "Buscar lote..."
@@ -842,7 +844,17 @@
         "ERROR_REQUIRED": "Debe indicar un motivo de anulación.",
         "DISABLED_HINT": "Este registro ya está anulado",
         "CANCEL": "Cancelar",
-        "CONFIRM": "Confirmar anulación"
+        "CONFIRM": "Confirmar anulación",
+        "REASONS": {
+          "DATA_ERROR": "Datos erróneos",
+          "WRONG_LOT": "Lote equivocado",
+          "DUPLICATE": "Registro duplicado",
+          "INCOMPLETE_COSTS": "Costos incompletos",
+          "OPERATIONAL_CANCEL": "Cancelación operativa",
+          "SUPPLIER_UNAVAILABLE": "Proveedor no disponible",
+          "CALCULATION_ERROR": "Error de cálculo",
+          "TRANSPORT_ERROR": "Error de transporte"
+        }
       },
       "ERRORS": {
         "LOAD": "No se pudieron cargar los registros.",
@@ -850,6 +862,16 @@
         "DELETE": "No se pudo eliminar el registro."
       }
     }
+  },
+  "MONITORING": {
+    "TITLE": "Monitoreo IoT",
+    "SUBTITLE": "Visualiza en tiempo real las variables de tu cafetería conectadas a Cafelab IoT.",
+    "COMING_SOON_TITLE": "Próximamente",
+    "COMING_SOON_DESCRIPTION": "Estamos preparando el panel de monitoreo en tiempo real. Pronto podrás ver lecturas en vivo de tus dispositivos: temperatura, humedad, presión y alertas.",
+    "METRIC_TEMPERATURE": "Temperatura",
+    "METRIC_HUMIDITY": "Humedad",
+    "METRIC_TRENDS": "Tendencias",
+    "METRIC_HINT": "Disponible próximamente"
   },
   "INVENTORY": {
     "PAGE": {

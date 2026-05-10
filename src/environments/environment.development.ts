@@ -1,7 +1,4 @@
-/**
- * Desarrollo local: `ng serve` usa esta configuración (ver angular.json → development).
- * Levanta el backend IoT en el mismo puerto (por defecto 8080, ver application-dev.properties).
- */
+
 export const environment = {
   production: false,
   serverBaseUrl: 'http://localhost:8080',

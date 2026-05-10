@@ -231,7 +231,8 @@
       "DEFECT_LIBRARY": "Defect Library",
       "ROAST_FLAVOR_CORRELATION": "Roast-Flavor Correlation",
       "GRIND_CALIBRATION": "Grind Calibration",
-      "BREW_RECIPES": "Brew Recipes"
+      "BREW_RECIPES": "Brew Recipes",
+      "MONITORING": "Monitoring"
     }
   },
   "CONTACT": {
@@ -317,7 +318,8 @@
     "GRIND_CALIBRATION": "Grind calibration",
     "BREW_RECIPES": "Drinks & recipes",
     "RECIPE_VIEW": "Recipe",
-    "PORTFOLIO_VIEW": "Portfolio"
+    "PORTFOLIO_VIEW": "Portfolio",
+    "MONITORING": "Monitoring"
   },
   "SEARCH": {
     "PLACEHOLDER": "Search lot..."
@@ -840,7 +842,17 @@
         "ERROR_REQUIRED": "You must provide an annulment reason.",
         "DISABLED_HINT": "This record is already annulled",
         "CANCEL": "Cancel",
-        "CONFIRM": "Confirm annulment"
+        "CONFIRM": "Confirm annulment",
+        "REASONS": {
+          "DATA_ERROR": "Wrong data",
+          "WRONG_LOT": "Wrong lot",
+          "DUPLICATE": "Duplicate record",
+          "INCOMPLETE_COSTS": "Incomplete costs",
+          "OPERATIONAL_CANCEL": "Operational cancellation",
+          "SUPPLIER_UNAVAILABLE": "Supplier unavailable",
+          "CALCULATION_ERROR": "Calculation error",
+          "TRANSPORT_ERROR": "Transport error"
+        }
       },
       "ERRORS": {
         "LOAD": "Records could not be loaded.",
@@ -848,6 +860,16 @@
         "DELETE": "The record could not be deleted."
       }
     }
+  },
+  "MONITORING": {
+    "TITLE": "IoT Monitoring",
+    "SUBTITLE": "View your coffee shop variables connected to Cafelab IoT in real time.",
+    "COMING_SOON_TITLE": "Coming soon",
+    "COMING_SOON_DESCRIPTION": "We are preparing the real-time monitoring dashboard. Soon you will be able to see live readings from your devices: temperature, humidity, pressure and alerts.",
+    "METRIC_TEMPERATURE": "Temperature",
+    "METRIC_HUMIDITY": "Humidity",
+    "METRIC_TRENDS": "Trends",
+    "METRIC_HINT": "Available soon"
   },
   "INVENTORY": {
     "PAGE": {

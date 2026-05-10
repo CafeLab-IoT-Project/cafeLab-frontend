@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../auth/infrastructure/AuthService';
+import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
 
 interface ConsumptionDetailData {
   id: number;
@@ -37,6 +38,7 @@ export class ConsumptionDetailDialogComponent {
     private router: Router,
     private authService: AuthService,
     private translate: TranslateService,
+    private dashboardNavigation: DashboardNavigationService,
   ) {}
 
   close(): void {
@@ -54,25 +56,7 @@ export class ConsumptionDetailDialogComponent {
   }
 
   goToDashboard(): void {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      this.router.navigate(['/login']);
-      this.close();
-      return;
-    }
-    switch (user.plan) {
-      case 'barista':
-        this.router.navigate(['/dashboard/barista']);
-        break;
-      case 'owner':
-        this.router.navigate(['/dashboard/owner']);
-        break;
-      case 'full':
-        this.router.navigate(['/dashboard/complete']);
-        break;
-      default:
-        this.router.navigate(['/']);
-    }
+    this.dashboardNavigation.goToHome();
     this.close();
   }
 }
