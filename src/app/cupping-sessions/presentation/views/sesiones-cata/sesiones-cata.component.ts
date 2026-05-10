@@ -30,6 +30,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../auth/infrastructure/AuthService';
+import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
 
 type SortMode = 'recent' | 'oldest' | 'name';
 
@@ -111,6 +112,7 @@ export class SesionesCataComponent implements OnInit {
     private readonly translate: TranslateService,
     private readonly authService: AuthService,
     private readonly router: Router,
+    private readonly dashboardNavigation: DashboardNavigationService,
   ) {}
 
   ngOnInit(): void {
@@ -324,28 +326,7 @@ export class SesionesCataComponent implements OnInit {
 
   
   goToHome(): void {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      void this.router.navigate(['/login']);
-      return;
-    }
-    if (user.home) {
-      void this.router.navigate([user.home]);
-      return;
-    }
-    switch (user.plan) {
-      case 'barista':
-        void this.router.navigate(['/dashboard/barista']);
-        break;
-      case 'owner':
-        void this.router.navigate(['/dashboard/owner']);
-        break;
-      case 'full':
-        void this.router.navigate(['/dashboard/complete']);
-        break;
-      default:
-        void this.router.navigate(['/']);
-    }
+    this.dashboardNavigation.goToHome();
   }
 
   

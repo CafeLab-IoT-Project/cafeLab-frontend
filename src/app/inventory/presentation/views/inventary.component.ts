@@ -21,6 +21,7 @@ import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { InventoryEntry } from '../../domain/model/inventory-entry.entity';
 import { Router } from '@angular/router';
+import { DashboardNavigationService } from '../../../shared/infrastructure/dashboard-navigation.service';
 
 interface CoffeeTypeMetrics {
   totalKg: number;
@@ -97,6 +98,7 @@ export class InventaryComponent implements OnInit {
     private supplierApi: SupplierApi,
     private router: Router,
     private translate: TranslateService,
+    private dashboardNavigation: DashboardNavigationService,
   ) {}
 
   coffeeTypeLabelKey(type: string): string {
@@ -320,23 +322,6 @@ export class InventaryComponent implements OnInit {
   }
 
   goToDashboard(): void {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      this.router.navigate(['/login']);
-      return;
-    }
-    switch (user.plan) {
-      case 'barista':
-        this.router.navigate(['/dashboard/barista']);
-        break;
-      case 'owner':
-        this.router.navigate(['/dashboard/owner']);
-        break;
-      case 'full':
-        this.router.navigate(['/dashboard/complete']);
-        break;
-      default:
-        this.router.navigate(['/']);
-    }
+    this.dashboardNavigation.goToHome();
   }
 }

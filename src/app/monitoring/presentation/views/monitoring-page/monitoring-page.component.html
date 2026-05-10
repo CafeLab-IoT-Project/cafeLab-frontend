@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <app-toolbar></app-toolbar>
+</mat-toolbar>
+
+<div class="monitoring-container">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a (click)="goToHome()">{{ 'BREADCRUMB.HOME' | translate }}</a>
+    <span class="breadcrumb-sep">&gt;</span>
+    <span class="current">{{ 'BREADCRUMB.MONITORING' | translate }}</span>
+  </nav>
+
+  <header class="page-header">
+    <h1>{{ 'MONITORING.TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'MONITORING.SUBTITLE' | translate }}</p>
+  </header>
+
+  <mat-card class="placeholder-card">
+    <mat-card-content>
+      <div class="placeholder-content">
+        <mat-icon class="placeholder-icon">sensors</mat-icon>
+        <h2>{{ 'MONITORING.COMING_SOON_TITLE' | translate }}</h2>
+        <p>{{ 'MONITORING.COMING_SOON_DESCRIPTION' | translate }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="cards-row">
+    <mat-card class="metric-card">
+      <mat-card-content>
+        <mat-icon class="metric-icon">device_thermostat</mat-icon>
+        <h3>{{ 'MONITORING.METRIC_TEMPERATURE' | translate }}</h3>
+        <p class="metric-hint">{{ 'MONITORING.METRIC_HINT' | translate }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="metric-card">
+      <mat-card-content>
+        <mat-icon class="metric-icon">water_drop</mat-icon>
+        <h3>{{ 'MONITORING.METRIC_HUMIDITY' | translate }}</h3>
+        <p class="metric-hint">{{ 'MONITORING.METRIC_HINT' | translate }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="metric-card">
+      <mat-card-content>
+        <mat-icon class="metric-icon">timeline</mat-icon>
+        <h3>{{ 'MONITORING.METRIC_TRENDS' | translate }}</h3>
+        <p class="metric-hint">{{ 'MONITORING.METRIC_HINT' | translate }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -231,7 +231,8 @@
       "DEFECT_LIBRARY": "Librería de Defectos",
       "ROAST_FLAVOR_CORRELATION": "Correlación Tueste-Sabor",
       "GRIND_CALIBRATION": "Calibración de Molienda",
-      "BREW_RECIPES": "Recetas"
+      "BREW_RECIPES": "Recetas",
+      "MONITORING": "Monitoreo"
     }
   },
   "CONTACT": {
@@ -319,7 +320,8 @@
     "GRIND_CALIBRATION": "Calibración de molienda",
     "BREW_RECIPES": "Bebidas y recetas",
     "RECIPE_VIEW": "Receta",
-    "PORTFOLIO_VIEW": "Portafolio"
+    "PORTFOLIO_VIEW": "Portafolio",
+    "MONITORING": "Monitoreo"
   },
   "SEARCH": {
     "PLACEHOLDER": "Buscar lote..."
@@ -715,8 +717,8 @@
     "FINISH_AND_SAVE": "Ver resultado",
     "SAVE_DRAFT": "Guardar Borrador",
     "CALCULATING": "Calculando...",
-    "SUCCESS_MESSAGE": "Cálculo listo. No se guarda en el servidor; puedes descargar el PDF o hacer un cálculo nuevo.",
-    "REGISTRATION_CODE": "Referencia del cálculo",
+    "SUCCESS_MESSAGE": "Cálculo guardado en el servidor. Puedes descargar el PDF, ver el registro en la lista o hacer un cálculo nuevo.",
+    "REGISTRATION_CODE": "ID de registro",
     "EXIT": "Salir",
     "PRINT_REPORT": "Imprimir reporte",
     "NEW_CALCULATION": "Nuevo Cálculo",
@@ -725,9 +727,17 @@
     "SAVING": "Guardando...",
     "CURRENCY": "S/.",
     "CURRENCY_PER_KG": "S/./kg",
+    "CURRENCY_LABEL": "Moneda del cálculo",
+    "CURRENCY_OPTION_PEN": "Sol peruano (S/.)",
+    "CURRENCY_OPTION_USD": "Dólar (USD $)",
+    "INPUT_DETAIL_TITLE": "Valores ingresados (puede editar por sección)",
+    "GENERATED_SUMMARY_TITLE": "Resumen por categoría",
+    "SUMMARY_FIELD_VALUE": "Valor",
+    "EDIT": "Editar",
+    "PER_KG_UNIT": " / kg",
     "SUMMARY_TITLE": "Resumen de costos",
     "SUMMARY_TYPE": "Tipo",
-    "SUMMARY_AMOUNT": "Monto (S/.)",
+    "SUMMARY_AMOUNT": "Importe",
     "RAW_MATERIAL": "Materia Prima",
     "DIRECT_LABOR": "Mano de Obra Directa",
     "INDIRECT_COSTS": "Costos Indirectos",
@@ -739,7 +749,7 @@
     "GREEN_COFFEE_QUANTITY_KG": "Cantidad de café verde (kg)",
     "TOTAL": "Total",
     "DIRECT_LABOR_COSTS_TITLE": "Costos de mano de obra directa",
-    "HOURS_WORKED": "Horas trabajadas",
+    "HOURS_WORKED": "Tiempo (minutos u horas trabajadas)",
     "COST_PER_HOUR": "Costo por hora",
     "NUMBER_OF_WORKERS": "Número de trabajadores",
     "TRANSPORT_COSTS": "Costos de Transporte",
@@ -763,15 +773,105 @@
     "ERRORS": {
       "AUTH_USER": "Usuario no autenticado o ID inválido.",
       "LOAD_LOTS": "Error al cargar los lotes.",
-      "FORM_REQUIRED": "Complete todos los campos requeridos.",
+      "FORM_REQUIRED": "Complete todos los campos con valores válidos.",
       "INVALID_USER_LOT": "Datos de usuario o lote inválidos.",
       "INVALID_SELECTED_LOT": "El lote seleccionado no es válido.",
-      "QUANTITY_KG_REQUIRED": "Indica una cantidad de café (kg) mayor que cero en costos directos."
+      "QUANTITY_KG_REQUIRED": "La cantidad de café verde debe estar entre 0,01 y 70 kg.",
+      "SERVER_SAVE": "No se pudo guardar el registro en el servidor. Comprueba tu conexión o inténtalo más tarde."
+    },
+    "VALIDATION": {
+      "REQUIRED": "Campo obligatorio",
+      "INVALID_NUMBER": "Ingrese un número válido",
+      "MAX_DECIMALS": "Máximo {{max}} decimales",
+      "NOT_INTEGER": "Debe ser un número entero (sin decimales)",
+      "RANGE_INT": "Debe estar entre {{min}} y {{max}}",
+      "WORKERS_RANGE": "Entre {{min}} y {{max}} trabajadores",
+      "RAW_COST_PER_KG": "Entre 0,01 y 100",
+      "RAW_QUANTITY_KG": "Entre 0,01 y 70 kg",
+      "LABOR_TIME": "Entre 1 y 60 (minutos u horas, entero)",
+      "COST_PER_HOUR": "Entre 0,10 y 100",
+      "TRANSPORT_COST_KG": "Entre 0,10 y 100",
+      "TRANSPORT_QTY": "Entre 1 y 200 kg",
+      "STORAGE_DAYS": "Entre 1 y 30 días",
+      "DAILY_COST": "Entre 0,10 y 100",
+      "PROCESSING_FIELD": "Entre 0 y 200",
+      "OTHERS_FIELD": "Entre 0 y 200"
     },
     "CATEGORY_TRANSPORT": "Transporte",
     "CATEGORY_STORAGE": "Almacenamiento",
     "CATEGORY_PROCESSING": "Procesamiento",
-    "CATEGORY_OTHERS": "Otros"
+    "CATEGORY_OTHERS": "Otros",
+    "SAVE_CONFIRM": {
+      "TITLE": "¿Confirmar registro de cálculo?",
+      "DISCLAIMER": "Una vez completado el registro no podrá modificarlo posteriormente.",
+      "HINT": "Verifique que todos los campos hayan sido completados adecuadamente. Si necesita revisar algo, cancele y use el botón «Editar» de cada fila del resumen.",
+      "CANCEL": "Cancelar",
+      "CONFIRM": "Completar registro"
+    },
+    "RECORDS": {
+      "TITLE": "Registros de cálculo",
+      "SEARCH_PLACEHOLDER": "Buscar por nombre de lote…",
+      "NEW_CALCULATION": "Nuevo cálculo",
+      "BACK_TO_LIST": "Volver a registros",
+      "LOADING": "Cargando registros…",
+      "EMPTY": "Aún no hay registros. Use «Nuevo cálculo» para crear uno.",
+      "COL_DATE": "Fecha",
+      "COL_LOT": "Nombre de lote",
+      "COL_AMOUNT": "Monto",
+      "COL_STATUS": "Estado",
+      "COL_ACTIONS": "Acciones",
+      "STATUS_REGISTERED": "Registrado",
+      "STATUS_ANNULLED": "Anulado",
+      "ANNUL_REASON_LABEL": "Motivo de anulación",
+      "VIEW": "Ver",
+      "DELETE": "Anular",
+      "VIEW_TITLE": "Detalle del registro",
+      "CLOSE": "Cerrar",
+      "SAVING": "Guardando…",
+      "OK": "OK",
+      "MARGIN_PERCENT": "Margen (%)",
+      "TOTAL_DIRECT": "Total costos directos",
+      "TOTAL_INDIRECT": "Total costos indirectos",
+      "TOTAL_COST": "Costo total",
+      "ANNUL": {
+        "TITLE": "Anular registro",
+        "QUESTION": "¿Está seguro de anular este registro? El registro no se eliminará: quedará marcado como anulado para auditoría y ya no podrá modificarse.",
+        "REASON_LABEL": "Indicar motivo",
+        "REASON_PLACEHOLDER": "Seleccione un motivo",
+        "REASON_OTHER": "Otro",
+        "REASON_CUSTOM_LABEL": "Detalle del motivo (máx. 25 caracteres)",
+        "REASON_CUSTOM_PLACEHOLDER": "Describa el motivo (máx. 25)",
+        "ERROR_REQUIRED": "Debe indicar un motivo de anulación.",
+        "DISABLED_HINT": "Este registro ya está anulado",
+        "CANCEL": "Cancelar",
+        "CONFIRM": "Confirmar anulación",
+        "REASONS": {
+          "DATA_ERROR": "Datos erróneos",
+          "WRONG_LOT": "Lote equivocado",
+          "DUPLICATE": "Registro duplicado",
+          "INCOMPLETE_COSTS": "Costos incompletos",
+          "OPERATIONAL_CANCEL": "Cancelación operativa",
+          "SUPPLIER_UNAVAILABLE": "Proveedor no disponible",
+          "CALCULATION_ERROR": "Error de cálculo",
+          "TRANSPORT_ERROR": "Error de transporte"
+        }
+      },
+      "ERRORS": {
+        "LOAD": "No se pudieron cargar los registros.",
+        "ANNULL": "No se pudo anular el registro.",
+        "DELETE": "No se pudo eliminar el registro."
+      }
+    }
+  },
+  "MONITORING": {
+    "TITLE": "Monitoreo IoT",
+    "SUBTITLE": "Visualiza en tiempo real las variables de tu cafetería conectadas a Cafelab IoT.",
+    "COMING_SOON_TITLE": "Próximamente",
+    "COMING_SOON_DESCRIPTION": "Estamos preparando el panel de monitoreo en tiempo real. Pronto podrás ver lecturas en vivo de tus dispositivos: temperatura, humedad, presión y alertas.",
+    "METRIC_TEMPERATURE": "Temperatura",
+    "METRIC_HUMIDITY": "Humedad",
+    "METRIC_TRENDS": "Tendencias",
+    "METRIC_HINT": "Disponible próximamente"
   },
   "INVENTORY": {
     "PAGE": {
@@ -1096,6 +1196,35 @@
         "MEDIUM_DARK": "Medio-Oscuro",
         "DARK": "Oscuro"
       }
+    }
+  },
+  "COST_RECORDS": {
+    "TITLE": "Registros de costos de producción",
+    "HINT": "Listado de gestiones de costo guardadas. Puede ver el detalle, editar montos y categorías o eliminar un registro.",
+    "LOADING": "Cargando registros…",
+    "EMPTY": "Aún no hay registros. Use «Nuevo cálculo» para crear uno.",
+    "NEW_CALCULATION": "Nuevo cálculo",
+    "COL_DATE": "Fecha",
+    "COL_LOT": "Lote",
+    "COL_AMOUNT": "Monto total",
+    "COL_ACTIONS": "Acciones",
+    "VIEW": "Ver",
+    "EDIT": "Editar",
+    "DELETE": "Eliminar",
+    "VIEW_TITLE": "Detalle del registro",
+    "EDIT_TITLE": "Editar registro",
+    "CLOSE": "Cerrar",
+    "SAVE": "Guardar cambios",
+    "SAVING": "Guardando…",
+    "MARGIN_PERCENT": "Margen (%)",
+    "CONFIRM_DELETE": "¿Eliminar este registro de costo? Esta acción no se puede deshacer.",
+    "ERRORS": {
+      "LOAD": "No se pudieron cargar los registros.",
+      "LOAD_ONE": "No se pudo cargar el registro.",
+      "CREATE": "No se pudo crear el registro.",
+      "UPDATE": "No se pudo actualizar el registro.",
+      "DELETE": "No se pudo eliminar el registro.",
+      "ANNULL": "No se pudo anular el registro."
     }
   }
 }

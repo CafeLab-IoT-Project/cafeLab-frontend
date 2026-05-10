@@ -19,6 +19,7 @@ import { CreatePortfolioDialogComponent } from '../../components/create-portfoli
 import { MatToolbar } from '@angular/material/toolbar';
 import { ToolbarComponent } from '../../../../public/presentation/components/toolbar/toolbar.component';
 import { AuthService } from '../../../../auth/infrastructure/AuthService';
+import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
 
 @Component({
   selector: 'app-portfolio-detail',
@@ -53,6 +54,7 @@ export class PortfolioDetailComponent implements OnInit {
     private snackBar: MatSnackBar,
     private translate: TranslateService,
     private authService: AuthService,
+    private dashboardNavigation: DashboardNavigationService,
   ) {}
 
   ngOnInit(): void {
@@ -259,28 +261,7 @@ export class PortfolioDetailComponent implements OnInit {
   }
 
   goToHome(): void {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      void this.router.navigate(['/login']);
-      return;
-    }
-    if (user.home) {
-      void this.router.navigate([user.home]);
-      return;
-    }
-    switch (user.plan) {
-      case 'barista':
-        void this.router.navigate(['/dashboard/barista']);
-        break;
-      case 'owner':
-        void this.router.navigate(['/dashboard/owner']);
-        break;
-      case 'full':
-        void this.router.navigate(['/dashboard/complete']);
-        break;
-      default:
-        void this.router.navigate(['/']);
-    }
+    this.dashboardNavigation.goToHome();
   }
 }
 

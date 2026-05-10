@@ -231,7 +231,8 @@
       "DEFECT_LIBRARY": "Defect Library",
       "ROAST_FLAVOR_CORRELATION": "Roast-Flavor Correlation",
       "GRIND_CALIBRATION": "Grind Calibration",
-      "BREW_RECIPES": "Brew Recipes"
+      "BREW_RECIPES": "Brew Recipes",
+      "MONITORING": "Monitoring"
     }
   },
   "CONTACT": {
@@ -317,7 +318,8 @@
     "GRIND_CALIBRATION": "Grind calibration",
     "BREW_RECIPES": "Drinks & recipes",
     "RECIPE_VIEW": "Recipe",
-    "PORTFOLIO_VIEW": "Portfolio"
+    "PORTFOLIO_VIEW": "Portfolio",
+    "MONITORING": "Monitoring"
   },
   "SEARCH": {
     "PLACEHOLDER": "Search lot..."
@@ -713,8 +715,8 @@
     "FINISH_AND_SAVE": "View result",
     "SAVE_DRAFT": "Save Draft",
     "CALCULATING": "Calculating...",
-    "SUCCESS_MESSAGE": "Calculation complete. Nothing is saved on the server; you can download the PDF or start a new calculation.",
-    "REGISTRATION_CODE": "Calculation reference",
+    "SUCCESS_MESSAGE": "Calculation saved on the server. You can download the PDF, open the records list, or start a new calculation.",
+    "REGISTRATION_CODE": "Record ID",
     "EXIT": "Exit",
     "PRINT_REPORT": "Print report",
     "NEW_CALCULATION": "New Calculation",
@@ -723,9 +725,17 @@
     "SAVING": "Saving...",
     "CURRENCY": "$",
     "CURRENCY_PER_KG": "$/kg",
+    "CURRENCY_LABEL": "Calculation currency",
+    "CURRENCY_OPTION_PEN": "Peruvian sol (PEN S/.)",
+    "CURRENCY_OPTION_USD": "US dollar (USD $)",
+    "INPUT_DETAIL_TITLE": "Entered values (you can edit by section)",
+    "GENERATED_SUMMARY_TITLE": "Summary by category",
+    "SUMMARY_FIELD_VALUE": "Value",
+    "EDIT": "Edit",
+    "PER_KG_UNIT": " / kg",
     "SUMMARY_TITLE": "Cost Summary",
     "SUMMARY_TYPE": "Type",
-    "SUMMARY_AMOUNT": "Amount ($)",
+    "SUMMARY_AMOUNT": "Amount (selected currency)",
     "RAW_MATERIAL": "Raw Material",
     "DIRECT_LABOR": "Direct Labor",
     "INDIRECT_COSTS": "Indirect Costs",
@@ -737,7 +747,7 @@
     "GREEN_COFFEE_QUANTITY_KG": "Green coffee quantity (kg)",
     "TOTAL": "Total",
     "DIRECT_LABOR_COSTS_TITLE": "Direct Labor Costs",
-    "HOURS_WORKED": "Hours worked",
+    "HOURS_WORKED": "Time (minutes or hours worked)",
     "COST_PER_HOUR": "Cost per hour",
     "NUMBER_OF_WORKERS": "Number of workers",
     "TRANSPORT_COSTS": "Transport Costs",
@@ -761,15 +771,105 @@
     "ERRORS": {
       "AUTH_USER": "User not authenticated or invalid ID.",
       "LOAD_LOTS": "Could not load lots.",
-      "FORM_REQUIRED": "Please complete all required fields.",
+      "FORM_REQUIRED": "Please complete all fields with valid values.",
       "INVALID_USER_LOT": "Invalid user or lot data.",
       "INVALID_SELECTED_LOT": "The selected lot is not valid.",
-      "QUANTITY_KG_REQUIRED": "Enter a green coffee quantity (kg) greater than zero in direct costs."
+      "QUANTITY_KG_REQUIRED": "Green coffee quantity must be between 0.01 and 70 kg.",
+      "SERVER_SAVE": "Could not save the record on the server. Check your connection and try again."
+    },
+    "VALIDATION": {
+      "REQUIRED": "Required field",
+      "INVALID_NUMBER": "Enter a valid number",
+      "MAX_DECIMALS": "At most {{max}} decimal places",
+      "NOT_INTEGER": "Must be a whole number (no decimals)",
+      "RANGE_INT": "Must be between {{min}} and {{max}}",
+      "WORKERS_RANGE": "Between {{min}} and {{max}} workers",
+      "RAW_COST_PER_KG": "Between 0.01 and 100",
+      "RAW_QUANTITY_KG": "Between 0.01 and 70 kg",
+      "LABOR_TIME": "Between 1 and 60 (minutes or hours, whole number)",
+      "COST_PER_HOUR": "Between 0.10 and 100",
+      "TRANSPORT_COST_KG": "Between 0.10 and 100",
+      "TRANSPORT_QTY": "Between 1 and 200 kg",
+      "STORAGE_DAYS": "Between 1 and 30 days",
+      "DAILY_COST": "Between 0.10 and 100",
+      "PROCESSING_FIELD": "Between 0 and 200",
+      "OTHERS_FIELD": "Between 0 and 200"
     },
     "CATEGORY_TRANSPORT": "Transport",
     "CATEGORY_STORAGE": "Storage",
     "CATEGORY_PROCESSING": "Processing",
-    "CATEGORY_OTHERS": "Other"
+    "CATEGORY_OTHERS": "Other",
+    "SAVE_CONFIRM": {
+      "TITLE": "Confirm calculation record?",
+      "DISCLAIMER": "Once the record is completed you will not be able to modify it later.",
+      "HINT": "Make sure every field has been filled in correctly. If you need to review anything, cancel and use the \"Edit\" button on each summary row.",
+      "CANCEL": "Cancel",
+      "CONFIRM": "Complete record"
+    },
+    "RECORDS": {
+      "TITLE": "Calculation records",
+      "SEARCH_PLACEHOLDER": "Search by lot name…",
+      "NEW_CALCULATION": "New calculation",
+      "BACK_TO_LIST": "Back to records",
+      "LOADING": "Loading records…",
+      "EMPTY": "No records yet. Use \"New calculation\" to create one.",
+      "COL_DATE": "Date",
+      "COL_LOT": "Lot name",
+      "COL_AMOUNT": "Amount",
+      "COL_STATUS": "Status",
+      "COL_ACTIONS": "Actions",
+      "STATUS_REGISTERED": "Registered",
+      "STATUS_ANNULLED": "Annulled",
+      "ANNUL_REASON_LABEL": "Annulment reason",
+      "VIEW": "View",
+      "DELETE": "Annul",
+      "VIEW_TITLE": "Record detail",
+      "CLOSE": "Close",
+      "SAVING": "Saving…",
+      "OK": "OK",
+      "MARGIN_PERCENT": "Margin (%)",
+      "TOTAL_DIRECT": "Total direct costs",
+      "TOTAL_INDIRECT": "Total indirect costs",
+      "TOTAL_COST": "Total cost",
+      "ANNUL": {
+        "TITLE": "Annul record",
+        "QUESTION": "Are you sure you want to annul this record? The record won't be deleted: it will stay flagged as annulled for auditing and can no longer be modified.",
+        "REASON_LABEL": "Provide a reason",
+        "REASON_PLACEHOLDER": "Select a reason",
+        "REASON_OTHER": "Other",
+        "REASON_CUSTOM_LABEL": "Reason detail (max 25 characters)",
+        "REASON_CUSTOM_PLACEHOLDER": "Describe the reason (max 25)",
+        "ERROR_REQUIRED": "You must provide an annulment reason.",
+        "DISABLED_HINT": "This record is already annulled",
+        "CANCEL": "Cancel",
+        "CONFIRM": "Confirm annulment",
+        "REASONS": {
+          "DATA_ERROR": "Wrong data",
+          "WRONG_LOT": "Wrong lot",
+          "DUPLICATE": "Duplicate record",
+          "INCOMPLETE_COSTS": "Incomplete costs",
+          "OPERATIONAL_CANCEL": "Operational cancellation",
+          "SUPPLIER_UNAVAILABLE": "Supplier unavailable",
+          "CALCULATION_ERROR": "Calculation error",
+          "TRANSPORT_ERROR": "Transport error"
+        }
+      },
+      "ERRORS": {
+        "LOAD": "Records could not be loaded.",
+        "ANNULL": "The record could not be annulled.",
+        "DELETE": "The record could not be deleted."
+      }
+    }
+  },
+  "MONITORING": {
+    "TITLE": "IoT Monitoring",
+    "SUBTITLE": "View your coffee shop variables connected to Cafelab IoT in real time.",
+    "COMING_SOON_TITLE": "Coming soon",
+    "COMING_SOON_DESCRIPTION": "We are preparing the real-time monitoring dashboard. Soon you will be able to see live readings from your devices: temperature, humidity, pressure and alerts.",
+    "METRIC_TEMPERATURE": "Temperature",
+    "METRIC_HUMIDITY": "Humidity",
+    "METRIC_TRENDS": "Trends",
+    "METRIC_HINT": "Available soon"
   },
   "INVENTORY": {
     "PAGE": {
@@ -1094,6 +1194,35 @@
         "MEDIUM_DARK": "Medium-dark",
         "DARK": "Dark"
       }
+    }
+  },
+  "COST_RECORDS": {
+    "TITLE": "Production cost records",
+    "HINT": "Saved cost calculations. You can view details, edit amounts, or delete a record.",
+    "LOADING": "Loading records…",
+    "EMPTY": "No records yet. Use “New calculation” to create one.",
+    "NEW_CALCULATION": "New calculation",
+    "COL_DATE": "Date",
+    "COL_LOT": "Lot",
+    "COL_AMOUNT": "Total amount",
+    "COL_ACTIONS": "Actions",
+    "VIEW": "View",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "VIEW_TITLE": "Record details",
+    "EDIT_TITLE": "Edit record",
+    "CLOSE": "Close",
+    "SAVE": "Save changes",
+    "SAVING": "Saving…",
+    "MARGIN_PERCENT": "Margin (%)",
+    "CONFIRM_DELETE": "Delete this cost record? This cannot be undone.",
+    "ERRORS": {
+      "LOAD": "Could not load records.",
+      "LOAD_ONE": "Could not load the record.",
+      "CREATE": "Could not create the record.",
+      "UPDATE": "Could not update the record.",
+      "DELETE": "Could not delete the record.",
+      "ANNULL": "Could not annul the record."
     }
   }
 }

@@ -21,7 +21,7 @@ export class RoastProfileAssembler
       tempEnd: Number(resource.tempEnd),
       isFavorite: Boolean(resource.isFavorite),
       createdAt: resource.createdAt,
-      lot: Number(resource.lot),
+      lot: Number(resource.coffeeLotId),
     };
   }
 
@@ -39,7 +39,7 @@ export class RoastProfileAssembler
         entity.createdAt instanceof Date
           ? entity.createdAt.toISOString()
           : String(entity.createdAt ?? ''),
-      lot: entity.lot,
+      coffeeLotId: entity.lot,
     };
   }
 

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MatToolbar } from '@angular/material/toolbar';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ToolbarComponent } from '../../../../public/presentation/components/toolbar/toolbar.component';
 import { DefectLibraryDetailComponent } from '../../components/defect-library-detail/defect-library-detail.component';
-import { AuthService } from '../../../../auth/infrastructure/AuthService';
+import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
 
 @Component({
   selector: 'app-view-defect-library-detail',
@@ -14,33 +14,9 @@ import { AuthService } from '../../../../auth/infrastructure/AuthService';
   styleUrl: './view-defect-library-detail.component.css',
 })
 export class ViewDefectLibraryDetailComponent {
-  constructor(
-    private readonly router: Router,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly dashboardNavigation: DashboardNavigationService) {}
 
   goToHome(): void {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      void this.router.navigate(['/login']);
-      return;
-    }
-    if (user.home) {
-      void this.router.navigate([user.home]);
-      return;
-    }
-    switch (user.plan) {
-      case 'barista':
-        void this.router.navigate(['/dashboard/barista']);
-        break;
-      case 'owner':
-        void this.router.navigate(['/dashboard/owner']);
-        break;
-      case 'full':
-        void this.router.navigate(['/dashboard/complete']);
-        break;
-      default:
-        void this.router.navigate(['/']);
-    }
+    this.dashboardNavigation.goToHome();
   }
 }

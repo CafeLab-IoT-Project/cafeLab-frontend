@@ -5,6 +5,7 @@ import { LanguageSwitcherComponent } from '../language-switcher/language-switche
 import { MatAnchor, MatButton } from '@angular/material/button';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService } from '../../../../auth/infrastructure/AuthService';
+import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
 import {
   MatDialog,
   MatDialogActions,
@@ -61,32 +62,11 @@ export class ToolbarComponent {
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
+    private dashboardNavigation: DashboardNavigationService,
   ) {}
 
   redirectToFeatures() {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      this.router.navigate(['/login']);
-      return;
-    }
-
-    if (user.home) {
-      this.router.navigate([user.home]);
-    } else {
-      switch (user.plan) {
-        case 'barista':
-          this.router.navigate(['/dashboard/barista']);
-          break;
-        case 'owner':
-          this.router.navigate(['/dashboard/owner']);
-          break;
-        case 'full':
-          this.router.navigate(['/dashboard/complete']);
-          break;
-        default:
-          this.router.navigate(['/login']);
-      }
-    }
+    this.dashboardNavigation.goToHome();
   }
 
   logout() {

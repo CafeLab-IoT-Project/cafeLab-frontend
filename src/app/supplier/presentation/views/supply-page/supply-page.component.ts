@@ -5,6 +5,7 @@ import {SupplierListComponent} from '../../components/provider-list/supplier-lis
 import { AuthService } from '../../../../auth/infrastructure/AuthService';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
 
 @Component({
   selector: 'app-supply-page',
@@ -21,35 +22,15 @@ import { TranslateModule } from '@ngx-translate/core';
 export class SupplyPageComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private dashboardNavigation: DashboardNavigationService,
   ) {}
 
   ngOnInit(): void {
   }
 
   goToHome(): void {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      this.router.navigate(['/login']);
-      return;
-    }
-    if (user.home) {
-      this.router.navigate([user.home]);
-      return;
-    }
-    switch (user.plan) {
-      case 'barista':
-        this.router.navigate(['/dashboard/barista']);
-        break;
-      case 'owner':
-        this.router.navigate(['/dashboard/owner']);
-        break;
-      case 'full':
-        this.router.navigate(['/dashboard/complete']);
-        break;
-      default:
-        this.router.navigate(['/']);
-    }
+    this.dashboardNavigation.goToHome();
   }
 
   refreshSuppliers(): void {

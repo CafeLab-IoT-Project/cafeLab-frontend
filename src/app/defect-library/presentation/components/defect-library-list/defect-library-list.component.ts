@@ -23,6 +23,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { AuthService } from '../../../../auth/infrastructure/AuthService';
 import { DefectLibraryApi } from '../../../application/defect-library.api';
 import type { DefectLibraryEntry } from '../../../domain/model/defect-library-entry.entity';
+import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
 
 @Component({
   selector: 'app-defect-library-list',
@@ -65,6 +66,7 @@ export class DefectLibraryListComponent implements OnInit {
     private readonly defectLibraryApi: DefectLibraryApi,
     private readonly router: Router,
     private readonly authService: AuthService,
+    private readonly dashboardNavigation: DashboardNavigationService,
   ) {}
 
   ngOnInit(): void {
@@ -114,27 +116,6 @@ export class DefectLibraryListComponent implements OnInit {
 
   
   goToHome(): void {
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      void this.router.navigate(['/login']);
-      return;
-    }
-    if (user.home) {
-      void this.router.navigate([user.home]);
-      return;
-    }
-    switch (user.plan) {
-      case 'barista':
-        void this.router.navigate(['/dashboard/barista']);
-        break;
-      case 'owner':
-        void this.router.navigate(['/dashboard/owner']);
-        break;
-      case 'full':
-        void this.router.navigate(['/dashboard/complete']);
-        break;
-      default:
-        void this.router.navigate(['/']);
-    }
+    this.dashboardNavigation.goToHome();
   }
 }
