@@ -23,4 +23,19 @@ describe('MetricsCardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render the metric values received as inputs', () => {
+    component.costPerKg = 12.5;
+    component.potentialMargin = 45.2;
+    component.suggestedPrice = 18.75;
+    component.currencySymbol = '$';
+
+    fixture.detectChanges();
+
+    const text = fixture.nativeElement.textContent.replace(/\s+/g, ' ');
+
+    expect(text).toContain('$ 12.50');
+    expect(text).toContain('45.2%');
+    expect(text).toContain('$ 18.75');
+  });
 });
