@@ -866,6 +866,199 @@
   "MONITORING": {
     "TITLE": "Monitoreo IoT",
     "SUBTITLE": "Visualiza en tiempo real las variables de tu cafetería conectadas a Cafelab IoT.",
+    "HUB": {
+      "HERO_TITLE": "Monitoreo inteligente de Lotes de Café",
+      "HERO_SUBTITLE": "Supervisa temperatura, humedad y condiciones críticas en tiempo real mediante sensores IoT y analíticas inteligentes.",
+      "ENTER": "Ingresar",
+      "CARDS": {
+        "LOTS": {
+          "TITLE": "Lotes",
+          "DESCRIPTION": "Visualiza y administra los lotes monitoreados en tiempo real."
+        },
+        "CONFIGURATION": {
+          "TITLE": "Configuración",
+          "DESCRIPTION": "Define parámetros críticos y límites para el monitoreo inteligente."
+        },
+        "ALERTS": {
+          "TITLE": "Alertas",
+          "DESCRIPTION": "Recibe notificaciones ante anomalías detectadas por los sensores."
+        },
+        "ANALYTICS": {
+          "TITLE": "Analíticas",
+          "DESCRIPTION": "Analiza tendencias y métricas históricas del monitoreo IoT."
+        }
+      }
+    },
+    "LOTS": {
+      "BREADCRUMB": "Lotes",
+      "HERO_TITLE": "Lotes",
+      "TITLE": "Lotes de café activos",
+      "SUBTITLE": "Estado directo y acceso de control.",
+      "SEARCH_PLACEHOLDER": "Buscar lote...",
+      "NEW_BATCH": "+ Nuevo lote",
+      "TEMP": "Temp",
+      "HUM": "Hum",
+      "DETAILS": "Detalles",
+      "ACTIVATE_COOLING": "Activar enfriamiento",
+      "LOADING": "Cargando lotes monitoreados...",
+      "EMPTY": "No hay lotes que coincidan con la búsqueda.",
+      "EMPTY_NO_LOTS": "No hay lotes disponibles. Crea un lote para comenzar el monitoreo.",
+      "STATUS": {
+        "OPTIMAL": "Óptimo",
+        "WARNING": "Advertencia",
+        "CRITICAL": "Crítico",
+        "UNCONFIGURED": "Sin configurar",
+        "NO_DATA": "Sin datos"
+      },
+      "SUMMARY": {
+        "ACTIVE": "Lotes activos",
+        "LOAD": "Carga del sistema",
+        "LOAD_VALUE": "24%",
+        "ALERTS": "Alertas",
+        "ANALYTICS": "Analíticas completas →"
+      },
+      "ERRORS": {
+        "LOAD": "No se pudieron cargar los lotes monitoreados."
+      }
+    },
+    "ALERTS": {
+      "BREADCRUMB": "Alertas",
+      "HERO_TITLE": "Alertas",
+      "TITLE": "Centro de alertas",
+      "SUBTITLE": "Gestión inmediata de incidencias en almacenamiento",
+      "FILTERS": {
+        "ALL": "Todos",
+        "CRITICAL": "Críticos",
+        "WARNING": "Avisos"
+      },
+      "SORT_RECENT": "Recientes",
+      "EMPTY": "No hay alertas para el filtro seleccionado.",
+      "PENDING_COUNT": "Mostrando {{count}} notificaciones pendientes",
+      "MARK_ALL": "Marcar todo como leído",
+      "MARK_ALL_SUCCESS": "Todas las alertas fueron marcadas como leídas.",
+      "SEVERITY": {
+        "CRITICAL": "Crítico",
+        "WARNING": "Aviso",
+        "INFO": "Info"
+      },
+      "ACTIONS": {
+        "TAKE_ACTION": "Tomar acción",
+        "RESOLVE": "Resolver",
+        "ACKNOWLEDGE": "Entendido",
+        "VIEW_REPORT": "Ver reporte"
+      },
+      "ITEMS": {
+        "TEMP_PEAK": {
+          "TITLE": "Pico crítico de temperatura",
+          "DESCRIPTION": "Se detectó un pico de 50°C en el lote. Se requiere inspección inmediata del almacén.",
+          "LOT": "Lote 1",
+          "TIME": "10:45 AM",
+          "METRIC": "50°C"
+        },
+        "HUMIDITY": {
+          "TITLE": "Divergencia de humedad",
+          "DESCRIPTION": "La humedad superó el umbral configurado. Se recomienda activar el deshumidificador.",
+          "LOT": "Lote 6",
+          "TIME": "09:20 AM",
+          "METRIC": "70%"
+        },
+        "BATTERY": {
+          "TITLE": "Batería baja del sensor",
+          "DESCRIPTION": "El nodo IoT reporta batería crítica. Programar mantenimiento en las próximas 48h.",
+          "LOT": "Nodo 04",
+          "TIME": "08:05 AM",
+          "METRIC": "15%"
+        },
+        "BATCH_DONE": {
+          "TITLE": "Lote finalizado",
+          "DESCRIPTION": "El lote completó su ciclo de monitoreo. El seguimiento ambiental permanece activo.",
+          "LOT": "Lote 12",
+          "TIME": "07:30 AM",
+          "METRIC": "Completado"
+        }
+      }
+    },
+    "ANALYTICS": {
+      "BREADCRUMB": "Analíticas",
+      "HERO_TITLE": "Analíticas",
+      "TITLE": "Análisis de desempeño",
+      "SUBTITLE": "Métricas clave para",
+      "LAST_24H": "Últimas 24h",
+      "REALTIME_VIEW": "Vista: Tiempo real",
+      "LOADING_LOTS": "Cargando lotes...",
+      "LOADING_ANALYTICS": "Cargando analíticas...",
+      "EMPTY_NO_LOTS": "No hay lotes disponibles para analizar.",
+      "TREND_TITLE": "Tendencia ambiental",
+      "NO_DATA": "No hay lecturas suficientes para mostrar la tendencia.",
+      "LEGEND": {
+        "TEMP": "Temp",
+        "HUM": "Hum"
+      },
+      "AXIS": {
+        "START": "Hace 24h",
+        "END": "Ahora"
+      },
+      "KPI": {
+        "AVG_TEMP": "Temperatura media",
+        "AVG_HUM": "Humedad media",
+        "QUALITY": "Calidad proyectada",
+        "QUALITY_VALUE": "Premium",
+        "QUALITY_GRADE": "Grado A",
+        "STABLE": "Estable",
+        "IN_RANGE": "Dentro de rango",
+        "OUT_OF_RANGE": "Fuera de rango",
+        "NO_BASELINE": "Sin referencia"
+      },
+      "EVENTS": {
+        "TITLE": "Eventos recientes",
+        "AUDIT_TITLE": "Auditoría completada",
+        "AUDIT_DESC": "El lote mantiene estabilidad óptima.",
+        "AUDIT_TIME": "1d",
+        "ADJUST_TITLE": "Ajuste automático de temperatura",
+        "ADJUST_DESC": "Compensación de 0.5°C realizada con éxito.",
+        "ADJUST_TIME": "2h"
+      },
+      "HEALTH": {
+        "TITLE": "Salud del lote",
+        "SCORE": "92%",
+        "META": "Batch #0912 — 14 días desde cosecha"
+      },
+      "ERRORS": {
+        "LOAD_LOTS": "No se pudieron cargar los lotes.",
+        "LOAD_ANALYTICS": "No se pudieron cargar las analíticas del lote."
+      }
+    },
+    "CONFIGURATION": {
+      "BREADCRUMB": "Configuración",
+      "HERO_TITLE": "Configuración",
+      "TITLE": "Configuración",
+      "SUBTITLE": "Ajuste rápido de parámetros operativos.",
+      "RESET": "Reset",
+      "SAVE": "Guardar",
+      "ACTIVE": "Activo",
+      "TEMPERATURE": "Temperatura (°C)",
+      "HUMIDITY": "Humedad (%)",
+      "MIN": "Mín",
+      "MAX": "Máx",
+      "MANUAL_CONTROLS": "Controles manuales",
+      "MANUAL_HINT": "Disponible próximamente. Estos controles no están conectados al backend aún.",
+      "DEHUMIDIFIER": "Deshumidificador",
+      "VENTILATION": "Ventilación",
+      "LOADING_LOTS": "Cargando lotes...",
+      "LOADING_THRESHOLD": "Cargando configuración del lote...",
+      "SUCCESS": {
+        "SAVED": "Configuración guardada correctamente."
+      },
+      "ERRORS": {
+        "LOAD_LOTS": "No se pudieron cargar los lotes.",
+        "LOAD_THRESHOLD": "No se pudo cargar la configuración del lote.",
+        "NO_LOTS": "No hay lotes disponibles. Crea un lote antes de configurar umbrales.",
+        "SAVE": "No se pudo guardar la configuración.",
+        "TEMP_RANGE": "La temperatura mínima no puede ser mayor que la máxima.",
+        "HUMIDITY_RANGE": "La humedad mínima no puede ser mayor que la máxima.",
+        "HUMIDITY_BOUNDS": "La humedad debe estar entre 0 y 100."
+      }
+    },
     "COMING_SOON_TITLE": "Próximamente",
     "COMING_SOON_DESCRIPTION": "Estamos preparando el panel de monitoreo en tiempo real. Pronto podrás ver lecturas en vivo de tus dispositivos: temperatura, humedad, presión y alertas.",
     "METRIC_TEMPERATURE": "Temperatura",
