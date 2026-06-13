@@ -5,6 +5,7 @@ export interface EnvironmentThreshold {
   maxTemperature: number;
   minHumidity: number;
   maxHumidity: number;
+  syncIntervalSeconds: number | null;
 }
 
 export interface EnvironmentThresholdFormValues {
@@ -12,4 +13,5 @@ export interface EnvironmentThresholdFormValues {
   maxTemperature: number;
   minHumidity: number;
   maxHumidity: number;
+  syncIntervalSeconds: number;
 }

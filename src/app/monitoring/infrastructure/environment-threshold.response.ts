@@ -5,6 +5,7 @@ export interface EnvironmentThresholdResource {
   maxTemperature: number;
   minHumidity: number;
   maxHumidity: number;
+  syncIntervalSeconds: number | null;
 }
 
 export interface CreateEnvironmentThresholdBody {
@@ -13,4 +14,5 @@ export interface CreateEnvironmentThresholdBody {
   maxTemperature: number;
   minHumidity: number;
   maxHumidity: number;
+  syncIntervalSeconds: number;
 }

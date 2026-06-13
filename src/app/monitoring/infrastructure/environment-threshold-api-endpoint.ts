@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import type { EnvironmentThreshold } from '../domain/model/environment-threshold.entity';
+import type {
+  EnvironmentThreshold,
+  EnvironmentThresholdFormValues,
+} from '../domain/model/environment-threshold.entity';
 import { EnvironmentThresholdAssembler } from './environment-threshold.assembler';
 import type { EnvironmentThresholdResource } from './environment-threshold.response';
 
@@ -33,10 +36,7 @@ export class EnvironmentThresholdApiEndpoint {
 
   create(
     coffeeLotId: number,
-    values: Pick<
-      EnvironmentThreshold,
-      'minTemperature' | 'maxTemperature' | 'minHumidity' | 'maxHumidity'
-    >,
+    values: EnvironmentThresholdFormValues,
   ): Observable<EnvironmentThreshold> {
     const body = this.assembler.toCreateBody(coffeeLotId, values);
     return this.http
@@ -46,10 +46,7 @@ export class EnvironmentThresholdApiEndpoint {
 
   update(
     coffeeLotId: number,
-    values: Pick<
-      EnvironmentThreshold,
-      'minTemperature' | 'maxTemperature' | 'minHumidity' | 'maxHumidity'
-    >,
+    values: EnvironmentThresholdFormValues,
   ): Observable<EnvironmentThreshold> {
     const body = this.assembler.toCreateBody(coffeeLotId, values);
     return this.http

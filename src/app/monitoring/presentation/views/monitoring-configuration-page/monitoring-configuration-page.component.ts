@@ -17,7 +17,10 @@ const DEFAULT_FORM: EnvironmentThresholdFormValues = {
   maxTemperature: 24,
   minHumidity: 45,
   maxHumidity: 60,
+  syncIntervalSeconds: 10,
 };
+
+const MIN_SYNC_INTERVAL_SECONDS = 5;
 
 @Component({
   selector: 'app-monitoring-configuration-page',
@@ -130,6 +133,8 @@ export class MonitoringConfigurationPageComponent implements OnInit {
             maxTemperature: saved.maxTemperature,
             minHumidity: saved.minHumidity,
             maxHumidity: saved.maxHumidity,
+            syncIntervalSeconds:
+              saved.syncIntervalSeconds ?? this.formValues.syncIntervalSeconds,
           };
           this.savedValues = { ...this.formValues };
           this.saving = false;
@@ -166,6 +171,8 @@ export class MonitoringConfigurationPageComponent implements OnInit {
             maxTemperature: threshold.maxTemperature,
             minHumidity: threshold.minHumidity,
             maxHumidity: threshold.maxHumidity,
+            syncIntervalSeconds:
+              threshold.syncIntervalSeconds ?? DEFAULT_FORM.syncIntervalSeconds,
           };
         } else {
           this.thresholdExists = false;
@@ -203,6 +210,13 @@ export class MonitoringConfigurationPageComponent implements OnInit {
       return this.translate.instant(
         'MONITORING.CONFIGURATION.ERRORS.HUMIDITY_BOUNDS',
       );
+    }
+
+    if (
+      !Number.isFinite(this.formValues.syncIntervalSeconds) ||
+      this.formValues.syncIntervalSeconds < MIN_SYNC_INTERVAL_SECONDS
+    ) {
+      return `El intervalo de sincronización debe ser de al menos ${MIN_SYNC_INTERVAL_SECONDS} segundos.`;
     }
 
     return '';

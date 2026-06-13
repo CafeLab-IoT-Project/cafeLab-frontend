@@ -146,6 +146,26 @@
               </div>
             </div>
           </article>
+
+          <article class="threshold-card">
+            <div class="threshold-card-header">
+              <div class="threshold-card-title">
+                <mat-icon>sync</mat-icon>
+                <span>Intervalo de sincronización (s)</span>
+              </div>
+            </div>
+
+            <div class="range-row">
+              <div class="range-field">
+                <span class="range-label">Cada</span>
+                <div class="range-control">
+                  <button type="button" (click)="adjustValue('syncIntervalSeconds', -5)">−</button>
+                  <span>{{ formValues.syncIntervalSeconds }}</span>
+                  <button type="button" (click)="adjustValue('syncIntervalSeconds', 5)">+</button>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
       }
     }

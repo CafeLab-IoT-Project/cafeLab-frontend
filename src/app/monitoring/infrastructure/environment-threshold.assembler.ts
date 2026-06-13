@@ -13,6 +13,7 @@ export class EnvironmentThresholdAssembler {
       maxTemperature: resource.maxTemperature,
       minHumidity: resource.minHumidity,
       maxHumidity: resource.maxHumidity,
+      syncIntervalSeconds: resource.syncIntervalSeconds ?? null,
     };
   }
 
@@ -21,7 +22,7 @@ export class EnvironmentThresholdAssembler {
     values: Pick<
       EnvironmentThreshold,
       'minTemperature' | 'maxTemperature' | 'minHumidity' | 'maxHumidity'
-    >,
+    > & { syncIntervalSeconds: number },
   ): CreateEnvironmentThresholdBody {
     return {
       coffeeLotId,
@@ -29,6 +30,7 @@ export class EnvironmentThresholdAssembler {
       maxTemperature: values.maxTemperature,
       minHumidity: values.minHumidity,
       maxHumidity: values.maxHumidity,
+      syncIntervalSeconds: values.syncIntervalSeconds,
     };
   }
 }
