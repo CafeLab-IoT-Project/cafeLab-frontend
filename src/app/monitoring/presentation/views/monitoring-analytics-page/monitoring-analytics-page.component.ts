@@ -27,7 +27,7 @@ import type { EnvironmentThreshold } from '../../../domain/model/environment-thr
 import type { TelemetryRecord } from '../../../domain/model/telemetry-record.entity';
 import { MonitoringTrendChartComponent } from '../../components/monitoring-trend-chart/monitoring-trend-chart.component';
 
-const POLLING_INTERVAL_MS = 30_000;
+const POLLING_INTERVAL_MS = 5_000;
 
 interface RecentEventView {
   icon: string;

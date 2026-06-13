@@ -14,7 +14,7 @@ import type {
 } from '../../../domain/model/monitoring-alert.entity';
 import { MonitoringAlertCardComponent } from '../../components/monitoring-alert-card/monitoring-alert-card.component';
 
-const POLLING_INTERVAL_MS = 30_000;
+const POLLING_INTERVAL_MS = 5_000;
 
 @Component({
   selector: 'app-monitoring-alerts-page',
