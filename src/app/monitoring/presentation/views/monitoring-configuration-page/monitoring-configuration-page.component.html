@@ -147,22 +147,6 @@
             </div>
           </article>
         </div>
-
-        <section class="manual-controls">
-          <h3>{{ 'MONITORING.CONFIGURATION.MANUAL_CONTROLS' | translate }}</h3>
-          <p class="manual-hint">{{ 'MONITORING.CONFIGURATION.MANUAL_HINT' | translate }}</p>
-
-          <div class="manual-grid">
-            <div class="manual-card">
-              <span>{{ 'MONITORING.CONFIGURATION.DEHUMIDIFIER' | translate }}</span>
-              <mat-slide-toggle [(ngModel)]="dehumidifierOn" disabled />
-            </div>
-            <div class="manual-card">
-              <span>{{ 'MONITORING.CONFIGURATION.VENTILATION' | translate }}</span>
-              <mat-slide-toggle [(ngModel)]="ventilationOn" disabled />
-            </div>
-          </div>
-        </section>
       }
     }
   </div>

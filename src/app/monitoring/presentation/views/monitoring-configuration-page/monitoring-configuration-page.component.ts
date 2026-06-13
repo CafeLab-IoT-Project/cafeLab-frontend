@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CoffeeLotApi } from '../../../../coffee-lot/application/coffee-lot.api';
@@ -28,7 +27,6 @@ const DEFAULT_FORM: EnvironmentThresholdFormValues = {
     FormsModule,
     MatToolbar,
     MatIconModule,
-    MatSlideToggleModule,
     RouterLink,
     ToolbarComponent,
     TranslatePipe,
@@ -47,9 +45,6 @@ export class MonitoringConfigurationPageComponent implements OnInit {
   saving = false;
   errorMessage = '';
   successMessage = '';
-
-  dehumidifierOn = true;
-  ventilationOn = false;
 
   constructor(
     private readonly coffeeLotApi: CoffeeLotApi,

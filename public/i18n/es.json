@@ -912,8 +912,7 @@
       },
       "SUMMARY": {
         "ACTIVE": "Lotes activos",
-        "LOAD": "Carga del sistema",
-        "LOAD_VALUE": "24%",
+        "LOAD": "Cobertura con telemetría",
         "ALERTS": "Alertas",
         "ANALYTICS": "Analíticas completas →"
       },
@@ -932,49 +931,46 @@
         "WARNING": "Avisos"
       },
       "SORT_RECENT": "Recientes",
+      "LOADING": "Cargando alertas...",
       "EMPTY": "No hay alertas para el filtro seleccionado.",
       "PENDING_COUNT": "Mostrando {{count}} notificaciones pendientes",
       "MARK_ALL": "Marcar todo como leído",
       "MARK_ALL_SUCCESS": "Todas las alertas fueron marcadas como leídas.",
+      "ERRORS": {
+        "LOAD": "No se pudieron cargar las alertas."
+      },
       "SEVERITY": {
         "CRITICAL": "Crítico",
         "WARNING": "Aviso",
         "INFO": "Info"
       },
-      "ACTIONS": {
-        "TAKE_ACTION": "Tomar acción",
-        "RESOLVE": "Resolver",
-        "ACKNOWLEDGE": "Entendido",
-        "VIEW_REPORT": "Ver reporte"
-      },
-      "ITEMS": {
-        "TEMP_PEAK": {
-          "TITLE": "Pico crítico de temperatura",
-          "DESCRIPTION": "Se detectó un pico de 50°C en el lote. Se requiere inspección inmediata del almacén.",
-          "LOT": "Lote 1",
-          "TIME": "10:45 AM",
-          "METRIC": "50°C"
+      "DERIVED": {
+        "NO_TIMESTAMP": "Sin lectura reciente",
+        "NO_DATA": {
+          "TITLE": "Sin telemetría",
+          "DESCRIPTION": "El lote no tiene lecturas recientes del sensor IoT.",
+          "METRIC": "Sin datos"
         },
-        "HUMIDITY": {
-          "TITLE": "Divergencia de humedad",
-          "DESCRIPTION": "La humedad superó el umbral configurado. Se recomienda activar el deshumidificador.",
-          "LOT": "Lote 6",
-          "TIME": "09:20 AM",
-          "METRIC": "70%"
+        "UNCONFIGURED": {
+          "TITLE": "Lote sin umbrales",
+          "DESCRIPTION": "Configura los umbrales ambientales para habilitar alertas automáticas.",
+          "METRIC": "Sin configurar"
         },
-        "BATTERY": {
-          "TITLE": "Batería baja del sensor",
-          "DESCRIPTION": "El nodo IoT reporta batería crítica. Programar mantenimiento en las próximas 48h.",
-          "LOT": "Nodo 04",
-          "TIME": "08:05 AM",
-          "METRIC": "15%"
+        "TEMP_CRITICAL": {
+          "TITLE": "Temperatura fuera de rango",
+          "DESCRIPTION": "La temperatura está fuera del rango configurado ({{min}}°C – {{max}}°C)."
         },
-        "BATCH_DONE": {
-          "TITLE": "Lote finalizado",
-          "DESCRIPTION": "El lote completó su ciclo de monitoreo. El seguimiento ambiental permanece activo.",
-          "LOT": "Lote 12",
-          "TIME": "07:30 AM",
-          "METRIC": "Completado"
+        "TEMP_WARNING": {
+          "TITLE": "Temperatura cerca del límite",
+          "DESCRIPTION": "La temperatura se acerca a los límites configurados ({{min}}°C – {{max}}°C)."
+        },
+        "HUMIDITY_CRITICAL": {
+          "TITLE": "Humedad fuera de rango",
+          "DESCRIPTION": "La humedad está fuera del rango configurado ({{min}}% – {{max}}%)."
+        },
+        "HUMIDITY_WARNING": {
+          "TITLE": "Humedad cerca del límite",
+          "DESCRIPTION": "La humedad se acerca a los límites configurados ({{min}}% – {{max}}%)."
         }
       }
     },
@@ -1001,27 +997,37 @@
       "KPI": {
         "AVG_TEMP": "Temperatura media",
         "AVG_HUM": "Humedad media",
-        "QUALITY": "Calidad proyectada",
-        "QUALITY_VALUE": "Premium",
-        "QUALITY_GRADE": "Grado A",
+        "QUALITY": "Estabilidad ambiental",
+        "QUALITY_PREMIUM": "Óptima",
+        "QUALITY_STANDARD": "Aceptable",
+        "QUALITY_AT_RISK": "En riesgo",
+        "GRADE_A": "Grado A",
+        "GRADE_B": "Grado B",
+        "GRADE_C": "Grado C",
         "STABLE": "Estable",
         "IN_RANGE": "Dentro de rango",
         "OUT_OF_RANGE": "Fuera de rango",
-        "NO_BASELINE": "Sin referencia"
+        "NO_BASELINE": "Sin referencia",
+        "NO_DATA": "Sin datos"
       },
       "EVENTS": {
         "TITLE": "Eventos recientes",
-        "AUDIT_TITLE": "Auditoría completada",
-        "AUDIT_DESC": "El lote mantiene estabilidad óptima.",
-        "AUDIT_TIME": "1d",
-        "ADJUST_TITLE": "Ajuste automático de temperatura",
-        "ADJUST_DESC": "Compensación de 0.5°C realizada con éxito.",
-        "ADJUST_TIME": "2h"
+        "EMPTY": "No hay eventos derivados de la telemetría en el período.",
+        "MINUTES_AGO": "Hace {{count}} min",
+        "HOURS_AGO": "Hace {{count}} h",
+        "DAYS_AGO": "Hace {{count}} d",
+        "TEMP_BREACH_TITLE": "Temperatura fuera de rango",
+        "TEMP_BREACH_DESC": "Lectura de {{value}}°C por encima o debajo del umbral.",
+        "TEMP_NEAR_TITLE": "Temperatura cerca del límite",
+        "TEMP_NEAR_DESC": "Lectura de {{value}}°C cerca del umbral configurado.",
+        "HUMIDITY_BREACH_TITLE": "Humedad fuera de rango",
+        "HUMIDITY_BREACH_DESC": "Lectura de {{value}}% por encima o debajo del umbral.",
+        "HUMIDITY_NEAR_TITLE": "Humedad cerca del límite",
+        "HUMIDITY_NEAR_DESC": "Lectura de {{value}}% cerca del umbral configurado."
       },
       "HEALTH": {
-        "TITLE": "Salud del lote",
-        "SCORE": "92%",
-        "META": "Batch #0912 — 14 días desde cosecha"
+        "TITLE": "Salud ambiental",
+        "META": "Estado: {{status}} · {{weight}} kg · Origen: {{origin}}"
       },
       "ERRORS": {
         "LOAD_LOTS": "No se pudieron cargar los lotes.",

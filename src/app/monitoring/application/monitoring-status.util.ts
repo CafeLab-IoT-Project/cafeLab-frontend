@@ -19,7 +19,7 @@ function isNearBoundary(
   return value < min + margin || value > max - margin;
 }
 
-function valueStatus(
+export function valueStatus(
   value: number,
   min: number,
   max: number,

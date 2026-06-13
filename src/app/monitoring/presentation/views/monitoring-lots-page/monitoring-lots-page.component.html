@@ -65,7 +65,13 @@
       </div>
       <div class="summary-item">
         <span class="summary-label">{{ 'MONITORING.LOTS.SUMMARY.LOAD' | translate }}</span>
-        <span class="summary-value muted">{{ 'MONITORING.LOTS.SUMMARY.LOAD_VALUE' | translate }}</span>
+        <span class="summary-value muted">
+          @if (telemetryCoveragePercent !== null) {
+            {{ telemetryCoveragePercent }}%
+          } @else {
+            —
+          }
+        </span>
       </div>
       <div class="summary-item">
         <span class="summary-label">{{ 'MONITORING.LOTS.SUMMARY.ALERTS' | translate }}</span>

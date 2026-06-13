@@ -910,8 +910,7 @@
       },
       "SUMMARY": {
         "ACTIVE": "Active lots",
-        "LOAD": "System load",
-        "LOAD_VALUE": "24%",
+        "LOAD": "Telemetry coverage",
         "ALERTS": "Alerts",
         "ANALYTICS": "Full analytics →"
       },
@@ -930,49 +929,46 @@
         "WARNING": "Warnings"
       },
       "SORT_RECENT": "Recent",
+      "LOADING": "Loading alerts...",
       "EMPTY": "No alerts match the selected filter.",
       "PENDING_COUNT": "Showing {{count}} pending notifications",
       "MARK_ALL": "Mark all as read",
       "MARK_ALL_SUCCESS": "All alerts were marked as read.",
+      "ERRORS": {
+        "LOAD": "Alerts could not be loaded."
+      },
       "SEVERITY": {
         "CRITICAL": "Critical",
         "WARNING": "Warning",
         "INFO": "Info"
       },
-      "ACTIONS": {
-        "TAKE_ACTION": "Take action",
-        "RESOLVE": "Resolve",
-        "ACKNOWLEDGE": "Understood",
-        "VIEW_REPORT": "View report"
-      },
-      "ITEMS": {
-        "TEMP_PEAK": {
-          "TITLE": "Critical temperature peak",
-          "DESCRIPTION": "A 50°C peak was detected in the lot. Immediate warehouse inspection is required.",
-          "LOT": "Lot 1",
-          "TIME": "10:45 AM",
-          "METRIC": "50°C"
+      "DERIVED": {
+        "NO_TIMESTAMP": "No recent reading",
+        "NO_DATA": {
+          "TITLE": "No telemetry",
+          "DESCRIPTION": "The lot has no recent IoT sensor readings.",
+          "METRIC": "No data"
         },
-        "HUMIDITY": {
-          "TITLE": "Humidity divergence",
-          "DESCRIPTION": "Humidity exceeded the configured threshold. Activating the dehumidifier is recommended.",
-          "LOT": "Lot 6",
-          "TIME": "9:20 AM",
-          "METRIC": "70%"
+        "UNCONFIGURED": {
+          "TITLE": "Lot without thresholds",
+          "DESCRIPTION": "Configure environmental thresholds to enable automatic alerts.",
+          "METRIC": "Unconfigured"
         },
-        "BATTERY": {
-          "TITLE": "Low sensor battery",
-          "DESCRIPTION": "The IoT node reports critical battery level. Schedule maintenance within 48h.",
-          "LOT": "Node 04",
-          "TIME": "8:05 AM",
-          "METRIC": "15%"
+        "TEMP_CRITICAL": {
+          "TITLE": "Temperature out of range",
+          "DESCRIPTION": "Temperature is outside the configured range ({{min}}°C – {{max}}°C)."
         },
-        "BATCH_DONE": {
-          "TITLE": "Batch completed",
-          "DESCRIPTION": "The lot completed its monitoring cycle. Environmental tracking remains active.",
-          "LOT": "Lot 12",
-          "TIME": "7:30 AM",
-          "METRIC": "Completed"
+        "TEMP_WARNING": {
+          "TITLE": "Temperature near limit",
+          "DESCRIPTION": "Temperature is approaching the configured limits ({{min}}°C – {{max}}°C)."
+        },
+        "HUMIDITY_CRITICAL": {
+          "TITLE": "Humidity out of range",
+          "DESCRIPTION": "Humidity is outside the configured range ({{min}}% – {{max}}%)."
+        },
+        "HUMIDITY_WARNING": {
+          "TITLE": "Humidity near limit",
+          "DESCRIPTION": "Humidity is approaching the configured limits ({{min}}% – {{max}}%)."
         }
       }
     },
@@ -999,27 +995,37 @@
       "KPI": {
         "AVG_TEMP": "Average temperature",
         "AVG_HUM": "Average humidity",
-        "QUALITY": "Projected quality",
-        "QUALITY_VALUE": "Premium",
-        "QUALITY_GRADE": "Grade A",
+        "QUALITY": "Environmental stability",
+        "QUALITY_PREMIUM": "Optimal",
+        "QUALITY_STANDARD": "Acceptable",
+        "QUALITY_AT_RISK": "At risk",
+        "GRADE_A": "Grade A",
+        "GRADE_B": "Grade B",
+        "GRADE_C": "Grade C",
         "STABLE": "Stable",
         "IN_RANGE": "Within range",
         "OUT_OF_RANGE": "Out of range",
-        "NO_BASELINE": "No baseline"
+        "NO_BASELINE": "No baseline",
+        "NO_DATA": "No data"
       },
       "EVENTS": {
         "TITLE": "Recent events",
-        "AUDIT_TITLE": "Audit completed",
-        "AUDIT_DESC": "The lot maintains optimal stability.",
-        "AUDIT_TIME": "1d",
-        "ADJUST_TITLE": "Automatic temperature adjustment",
-        "ADJUST_DESC": "0.5°C compensation completed successfully.",
-        "ADJUST_TIME": "2h"
+        "EMPTY": "No telemetry-derived events in this period.",
+        "MINUTES_AGO": "{{count}} min ago",
+        "HOURS_AGO": "{{count}} h ago",
+        "DAYS_AGO": "{{count}} d ago",
+        "TEMP_BREACH_TITLE": "Temperature out of range",
+        "TEMP_BREACH_DESC": "Reading of {{value}}°C above or below threshold.",
+        "TEMP_NEAR_TITLE": "Temperature near limit",
+        "TEMP_NEAR_DESC": "Reading of {{value}}°C near the configured threshold.",
+        "HUMIDITY_BREACH_TITLE": "Humidity out of range",
+        "HUMIDITY_BREACH_DESC": "Reading of {{value}}% above or below threshold.",
+        "HUMIDITY_NEAR_TITLE": "Humidity near limit",
+        "HUMIDITY_NEAR_DESC": "Reading of {{value}}% near the configured threshold."
       },
       "HEALTH": {
-        "TITLE": "Lot health",
-        "SCORE": "92%",
-        "META": "Batch #0912 — 14 days since harvest"
+        "TITLE": "Environmental health",
+        "META": "Status: {{status}} · {{weight}} kg · Origin: {{origin}}"
       },
       "ERRORS": {
         "LOAD_LOTS": "Lots could not be loaded.",

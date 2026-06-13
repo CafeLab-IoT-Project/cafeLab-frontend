@@ -75,7 +75,16 @@ export class MonitoringLotsPageComponent implements OnInit, OnDestroy {
   }
 
   get alertsCount(): number {
-    return this.monitoredLots.filter((lot) => lot.status === 'critical').length;
+    return this.monitoredLots.filter(
+      (lot) => lot.status === 'critical' || lot.status === 'warning',
+    ).length;
+  }
+
+  get telemetryCoveragePercent(): number | null {
+    if (this.monitoredLots.length === 0) {
+      return null;
+    }
+    return Math.round((this.activeLotsCount / this.monitoredLots.length) * 100);
   }
 
   onSearchChange(): void {

@@ -10,11 +10,14 @@ import { CoffeeLotApi } from '../../../../coffee-lot/application/coffee-lot.api'
 import type { CoffeeLot } from '../../../../coffee-lot/domain/model/coffee-lot.entity';
 import { ToolbarComponent } from '../../../../public/presentation/components/toolbar/toolbar.component';
 import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
+import { deriveRecentEventsFromTelemetry } from '../../../application/monitoring-alert.util';
 import {
   average,
   buildNormalizedSeries,
+  computeHealthScore,
   filterLast24Hours,
   humidityStatusLabelKey,
+  qualityFromHealthScore,
   temperatureStatusLabelKey,
   type ChartPoint,
 } from '../../../application/monitoring-analytics.util';
@@ -28,9 +31,9 @@ const POLLING_INTERVAL_MS = 30_000;
 
 interface RecentEventView {
   icon: string;
-  titleKey: string;
-  descriptionKey: string;
-  timeKey: string;
+  title: string;
+  description: string;
+  time: string;
 }
 
 @Component({
@@ -62,21 +65,11 @@ export class MonitoringAnalyticsPageComponent implements OnInit, OnDestroy {
   humidityStatusKey = 'MONITORING.ANALYTICS.KPI.NO_BASELINE';
   temperaturePoints: ChartPoint[] = [];
   humidityPoints: ChartPoint[] = [];
-
-  readonly recentEvents: RecentEventView[] = [
-    {
-      icon: 'check_circle',
-      titleKey: 'MONITORING.ANALYTICS.EVENTS.AUDIT_TITLE',
-      descriptionKey: 'MONITORING.ANALYTICS.EVENTS.AUDIT_DESC',
-      timeKey: 'MONITORING.ANALYTICS.EVENTS.AUDIT_TIME',
-    },
-    {
-      icon: 'device_thermostat',
-      titleKey: 'MONITORING.ANALYTICS.EVENTS.ADJUST_TITLE',
-      descriptionKey: 'MONITORING.ANALYTICS.EVENTS.ADJUST_DESC',
-      timeKey: 'MONITORING.ANALYTICS.EVENTS.ADJUST_TIME',
-    },
-  ];
+  healthScore: number | null = null;
+  qualityLabelKey = 'MONITORING.ANALYTICS.KPI.NO_DATA';
+  qualityGradeKey = 'MONITORING.ANALYTICS.KPI.NO_BASELINE';
+  lotMeta = '';
+  recentEvents: RecentEventView[] = [];
 
   private pollingSubscription?: Subscription;
 
@@ -146,7 +139,7 @@ export class MonitoringAnalyticsPageComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: ({ history, threshold }) => {
-          this.applyAnalytics(history, threshold);
+          this.applyAnalytics(history, threshold, coffeeLotId);
           this.loadingAnalytics = false;
           this.errorMessage = '';
         },
@@ -162,10 +155,12 @@ export class MonitoringAnalyticsPageComponent implements OnInit, OnDestroy {
   private applyAnalytics(
     history: TelemetryRecord[],
     threshold: EnvironmentThreshold | null,
+    coffeeLotId: number,
   ): void {
     const last24h = filterLast24Hours(history);
     const dataset = last24h.length > 0 ? last24h : history;
     const latest = dataset.length ? dataset[dataset.length - 1] : null;
+    const lot = this.lots.find((item) => item.id === coffeeLotId);
 
     this.avgTemperature = average(dataset.map((record) => record.temperature));
     this.avgHumidity = average(dataset.map((record) => record.humidity));
@@ -177,5 +172,26 @@ export class MonitoringAnalyticsPageComponent implements OnInit, OnDestroy {
     this.humidityPoints = buildNormalizedSeries(
       dataset.map((record) => record.humidity),
     );
+
+    this.healthScore = computeHealthScore(dataset, threshold);
+    const quality = qualityFromHealthScore(this.healthScore);
+    this.qualityLabelKey = quality.labelKey;
+    this.qualityGradeKey = quality.gradeKey;
+
+    this.recentEvents = deriveRecentEventsFromTelemetry(
+      dataset,
+      threshold,
+      this.translate,
+    );
+
+    if (lot) {
+      this.lotMeta = this.translate.instant('MONITORING.ANALYTICS.HEALTH.META', {
+        status: lot.status,
+        weight: lot.weight,
+        origin: lot.origin,
+      });
+    } else {
+      this.lotMeta = '';
+    }
   }
 }

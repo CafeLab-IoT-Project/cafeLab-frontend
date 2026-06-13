@@ -87,10 +87,10 @@
             <span class="kpi-status">{{ humidityStatusKey | translate }}</span>
           </article>
 
-          <article class="kpi-card static">
+          <article class="kpi-card">
             <span class="kpi-label">{{ 'MONITORING.ANALYTICS.KPI.QUALITY' | translate }}</span>
-            <span class="kpi-value">{{ 'MONITORING.ANALYTICS.KPI.QUALITY_VALUE' | translate }}</span>
-            <span class="kpi-status">{{ 'MONITORING.ANALYTICS.KPI.QUALITY_GRADE' | translate }}</span>
+            <span class="kpi-value">{{ qualityLabelKey | translate }}</span>
+            <span class="kpi-status">{{ qualityGradeKey | translate }}</span>
           </article>
         </div>
 
@@ -103,28 +103,40 @@
           <section class="events-card">
             <h3>{{ 'MONITORING.ANALYTICS.EVENTS.TITLE' | translate }}</h3>
             <ul class="events-list">
-              @for (event of recentEvents; track event.titleKey) {
-                <li>
-                  <mat-icon>{{ event.icon }}</mat-icon>
-                  <div>
-                    <strong>{{ event.titleKey | translate }}</strong>
-                    <p>{{ event.descriptionKey | translate }}</p>
-                  </div>
-                  <span class="event-time">{{ event.timeKey | translate }}</span>
+              @if (recentEvents.length === 0) {
+                <li class="events-empty">
+                  {{ 'MONITORING.ANALYTICS.EVENTS.EMPTY' | translate }}
                 </li>
+              } @else {
+                @for (event of recentEvents; track event.title + event.time) {
+                  <li>
+                    <mat-icon>{{ event.icon }}</mat-icon>
+                    <div>
+                      <strong>{{ event.title }}</strong>
+                      <p>{{ event.description }}</p>
+                    </div>
+                    <span class="event-time">{{ event.time }}</span>
+                  </li>
+                }
               }
             </ul>
           </section>
 
           <section class="health-card">
             <p class="health-label">{{ selectedLotLabel }}</p>
-            <p class="health-meta">{{ 'MONITORING.ANALYTICS.HEALTH.META' | translate }}</p>
+            @if (lotMeta) {
+              <p class="health-meta">{{ lotMeta }}</p>
+            }
             <div class="health-score-wrap">
               <span class="health-score-label">
                 {{ 'MONITORING.ANALYTICS.HEALTH.TITLE' | translate }}
               </span>
               <span class="health-score">
-                {{ 'MONITORING.ANALYTICS.HEALTH.SCORE' | translate }}
+                @if (healthScore !== null) {
+                  {{ healthScore }}%
+                } @else {
+                  {{ 'MONITORING.ANALYTICS.KPI.NO_DATA' | translate }}
+                }
               </span>
             </div>
           </section>

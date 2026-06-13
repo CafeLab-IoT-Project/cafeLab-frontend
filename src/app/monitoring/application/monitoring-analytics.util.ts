@@ -1,3 +1,4 @@
+import type { TranslateService } from '@ngx-translate/core';
 import type { EnvironmentThreshold } from '../domain/model/environment-threshold.entity';
 import type { TelemetryRecord } from '../domain/model/telemetry-record.entity';
 import { resolveLotMonitoringStatus } from './monitoring-status.util';
@@ -74,4 +75,95 @@ export function humidityStatusLabelKey(
   return inRange
     ? 'MONITORING.ANALYTICS.KPI.IN_RANGE'
     : 'MONITORING.ANALYTICS.KPI.OUT_OF_RANGE';
+}
+
+export function computeHealthScore(
+  records: TelemetryRecord[],
+  threshold: EnvironmentThreshold | null,
+): number | null {
+  if (!records.length || !threshold) {
+    return null;
+  }
+
+  const inRangeCount = records.filter((record) => {
+    const tempOk =
+      record.temperature >= threshold.minTemperature &&
+      record.temperature <= threshold.maxTemperature;
+    const humidityOk =
+      record.humidity >= threshold.minHumidity &&
+      record.humidity <= threshold.maxHumidity;
+    return tempOk && humidityOk;
+  }).length;
+
+  return Math.round((inRangeCount / records.length) * 100);
+}
+
+export function qualityFromHealthScore(score: number | null): {
+  labelKey: string;
+  gradeKey: string;
+} {
+  if (score === null) {
+    return {
+      labelKey: 'MONITORING.ANALYTICS.KPI.NO_DATA',
+      gradeKey: 'MONITORING.ANALYTICS.KPI.NO_BASELINE',
+    };
+  }
+
+  if (score >= 90) {
+    return {
+      labelKey: 'MONITORING.ANALYTICS.KPI.QUALITY_PREMIUM',
+      gradeKey: 'MONITORING.ANALYTICS.KPI.GRADE_A',
+    };
+  }
+
+  if (score >= 75) {
+    return {
+      labelKey: 'MONITORING.ANALYTICS.KPI.QUALITY_STANDARD',
+      gradeKey: 'MONITORING.ANALYTICS.KPI.GRADE_B',
+    };
+  }
+
+  return {
+    labelKey: 'MONITORING.ANALYTICS.KPI.QUALITY_AT_RISK',
+    gradeKey: 'MONITORING.ANALYTICS.KPI.GRADE_C',
+  };
+}
+
+export function formatMonitoringTimestamp(timestamp: string): string {
+  const date = new Date(timestamp);
+  if (Number.isNaN(date.getTime())) {
+    return timestamp;
+  }
+  return date.toLocaleString();
+}
+
+export function formatRelativeTime(
+  timestamp: string,
+  translate: TranslateService,
+): string {
+  const date = new Date(timestamp);
+  if (Number.isNaN(date.getTime())) {
+    return timestamp;
+  }
+
+  const diffMs = Date.now() - date.getTime();
+  const diffMinutes = Math.max(1, Math.round(diffMs / (60 * 1000)));
+
+  if (diffMinutes < 60) {
+    return translate.instant('MONITORING.ANALYTICS.EVENTS.MINUTES_AGO', {
+      count: diffMinutes,
+    });
+  }
+
+  const diffHours = Math.round(diffMinutes / 60);
+  if (diffHours < 24) {
+    return translate.instant('MONITORING.ANALYTICS.EVENTS.HOURS_AGO', {
+      count: diffHours,
+    });
+  }
+
+  const diffDays = Math.round(diffHours / 24);
+  return translate.instant('MONITORING.ANALYTICS.EVENTS.DAYS_AGO', {
+    count: diffDays,
+  });
 }

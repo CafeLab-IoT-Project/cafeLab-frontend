@@ -7,7 +7,7 @@
 
   <div class="alert-body">
     <div class="alert-title-row">
-      <h3>{{ alert.titleKey | translate }}</h3>
+      <h3>{{ alert.title }}</h3>
       <span class="severity-tag" [class]="'severity-tag--' + alert.severity">
         {{ 'MONITORING.ALERTS.SEVERITY.' + alert.severity.toUpperCase() | translate }}
       </span>
@@ -16,27 +16,18 @@
     <div class="alert-meta">
       <span>
         <mat-icon>inventory_2</mat-icon>
-        {{ alert.lotLabelKey | translate }}
+        {{ alert.lotLabel }}
       </span>
       <span>
         <mat-icon>schedule</mat-icon>
-        {{ alert.timeKey | translate }}
+        {{ alert.time }}
       </span>
       <span>
         <mat-icon>{{ alert.metricIcon }}</mat-icon>
-        {{ alert.metricValueKey | translate }}
+        {{ alert.metricValue }}
       </span>
     </div>
 
-    <p>{{ alert.descriptionKey | translate }}</p>
+    <p>{{ alert.description }}</p>
   </div>
-
-  <button
-    type="button"
-    class="alert-action"
-    [class]="'alert-action--' + alert.action"
-    disabled
-  >
-    {{ alert.actionKey | translate }}
-  </button>
 </article>

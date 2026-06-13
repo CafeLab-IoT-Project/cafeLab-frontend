@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Subscription, interval, startWith, switchMap } from 'rxjs';
 import { ToolbarComponent } from '../../../../public/presentation/components/toolbar/toolbar.component';
 import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
+import { MonitoringAlertApi } from '../../../application/monitoring-alert.api';
 import type {
   MonitoringAlert,
   MonitoringAlertFilter,
 } from '../../../domain/model/monitoring-alert.entity';
 import { MonitoringAlertCardComponent } from '../../components/monitoring-alert-card/monitoring-alert-card.component';
+
+const POLLING_INTERVAL_MS = 30_000;
 
 @Component({
   selector: 'app-monitoring-alerts-page',
@@ -27,62 +31,50 @@ import { MonitoringAlertCardComponent } from '../../components/monitoring-alert-
   templateUrl: './monitoring-alerts-page.component.html',
   styleUrls: ['./monitoring-alerts-page.component.css'],
 })
-export class MonitoringAlertsPageComponent {
+export class MonitoringAlertsPageComponent implements OnInit, OnDestroy {
   activeFilter: MonitoringAlertFilter = 'all';
   markAllMessage = '';
+  alerts: MonitoringAlert[] = [];
+  loading = true;
+  errorMessage = '';
+  private pollingSubscription?: Subscription;
 
-  alerts: MonitoringAlert[] = [
-    {
-      id: '1',
-      severity: 'critical',
-      titleKey: 'MONITORING.ALERTS.ITEMS.TEMP_PEAK.TITLE',
-      descriptionKey: 'MONITORING.ALERTS.ITEMS.TEMP_PEAK.DESCRIPTION',
-      lotLabelKey: 'MONITORING.ALERTS.ITEMS.TEMP_PEAK.LOT',
-      timeKey: 'MONITORING.ALERTS.ITEMS.TEMP_PEAK.TIME',
-      metricIcon: 'device_thermostat',
-      metricValueKey: 'MONITORING.ALERTS.ITEMS.TEMP_PEAK.METRIC',
-      action: 'action',
-      actionKey: 'MONITORING.ALERTS.ACTIONS.TAKE_ACTION',
-    },
-    {
-      id: '2',
-      severity: 'warning',
-      titleKey: 'MONITORING.ALERTS.ITEMS.HUMIDITY.TITLE',
-      descriptionKey: 'MONITORING.ALERTS.ITEMS.HUMIDITY.DESCRIPTION',
-      lotLabelKey: 'MONITORING.ALERTS.ITEMS.HUMIDITY.LOT',
-      timeKey: 'MONITORING.ALERTS.ITEMS.HUMIDITY.TIME',
-      metricIcon: 'water_drop',
-      metricValueKey: 'MONITORING.ALERTS.ITEMS.HUMIDITY.METRIC',
-      action: 'resolve',
-      actionKey: 'MONITORING.ALERTS.ACTIONS.RESOLVE',
-    },
-    {
-      id: '3',
-      severity: 'warning',
-      titleKey: 'MONITORING.ALERTS.ITEMS.BATTERY.TITLE',
-      descriptionKey: 'MONITORING.ALERTS.ITEMS.BATTERY.DESCRIPTION',
-      lotLabelKey: 'MONITORING.ALERTS.ITEMS.BATTERY.LOT',
-      timeKey: 'MONITORING.ALERTS.ITEMS.BATTERY.TIME',
-      metricIcon: 'battery_alert',
-      metricValueKey: 'MONITORING.ALERTS.ITEMS.BATTERY.METRIC',
-      action: 'acknowledge',
-      actionKey: 'MONITORING.ALERTS.ACTIONS.ACKNOWLEDGE',
-    },
-    {
-      id: '4',
-      severity: 'info',
-      titleKey: 'MONITORING.ALERTS.ITEMS.BATCH_DONE.TITLE',
-      descriptionKey: 'MONITORING.ALERTS.ITEMS.BATCH_DONE.DESCRIPTION',
-      lotLabelKey: 'MONITORING.ALERTS.ITEMS.BATCH_DONE.LOT',
-      timeKey: 'MONITORING.ALERTS.ITEMS.BATCH_DONE.TIME',
-      metricIcon: 'info',
-      metricValueKey: 'MONITORING.ALERTS.ITEMS.BATCH_DONE.METRIC',
-      action: 'report',
-      actionKey: 'MONITORING.ALERTS.ACTIONS.VIEW_REPORT',
-    },
-  ];
+  constructor(
+    private readonly monitoringAlertApi: MonitoringAlertApi,
+    private readonly dashboardNavigation: DashboardNavigationService,
+    private readonly translate: TranslateService,
+  ) {}
 
-  constructor(private readonly dashboardNavigation: DashboardNavigationService) {}
+  ngOnInit(): void {
+    this.pollingSubscription = interval(POLLING_INTERVAL_MS)
+      .pipe(
+        startWith(0),
+        switchMap(() => this.monitoringAlertApi.getAlerts()),
+      )
+      .subscribe({
+        next: (alerts) => {
+          const dismissedById = new Map(
+            this.alerts
+              .filter((alert) => alert.dismissed)
+              .map((alert) => [alert.id, true]),
+          );
+          this.alerts = alerts.map((alert) => ({
+            ...alert,
+            dismissed: dismissedById.get(alert.id) ?? false,
+          }));
+          this.loading = false;
+          this.errorMessage = '';
+        },
+        error: () => {
+          this.loading = false;
+          this.errorMessage = this.translate.instant('MONITORING.ALERTS.ERRORS.LOAD');
+        },
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.pollingSubscription?.unsubscribe();
+  }
 
   get visibleAlerts(): MonitoringAlert[] {
     return this.alerts.filter((alert) => {
