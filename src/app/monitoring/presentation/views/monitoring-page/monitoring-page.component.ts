@@ -1,36 +1,53 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatToolbar } from '@angular/material/toolbar';
-import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ToolbarComponent } from '../../../../public/presentation/components/toolbar/toolbar.component';
 import { DashboardNavigationService } from '../../../../shared/infrastructure/dashboard-navigation.service';
+import {
+  MonitoringHubCardComponent,
+  MonitoringHubCardData,
+} from '../../components/monitoring-hub-card/monitoring-hub-card.component';
 
-/**
- * Vista del módulo Monitoreo IoT.
- *
- * Por ahora actúa como placeholder accesible desde los tres dashboards (barista, owner,
- * full). El contenido real (lecturas de sensores, gráficas en tiempo real, alertas) se
- * conectará cuando esté el endpoint del backend IoT.
- */
 @Component({
   selector: 'app-monitoring-page',
   standalone: true,
   imports: [
-    CommonModule,
     MatToolbar,
-    MatCard,
-    MatCardContent,
-    MatCardTitle,
-    MatIconModule,
     ToolbarComponent,
     TranslatePipe,
+    MonitoringHubCardComponent,
   ],
   templateUrl: './monitoring-page.component.html',
   styleUrls: ['./monitoring-page.component.css'],
 })
 export class MonitoringPageComponent {
+  readonly hubCards: MonitoringHubCardData[] = [
+    {
+      titleKey: 'MONITORING.HUB.CARDS.LOTS.TITLE',
+      descriptionKey: 'MONITORING.HUB.CARDS.LOTS.DESCRIPTION',
+      imageUrl: 'assets/lote-monitoreo.jpg',
+      routeLink: '/monitoring/lots',
+    },
+    {
+      titleKey: 'MONITORING.HUB.CARDS.CONFIGURATION.TITLE',
+      descriptionKey: 'MONITORING.HUB.CARDS.CONFIGURATION.DESCRIPTION',
+      imageUrl: 'assets/configuracion-monitoreo.png',
+      routeLink: '/monitoring/configuration',
+    },
+    {
+      titleKey: 'MONITORING.HUB.CARDS.ALERTS.TITLE',
+      descriptionKey: 'MONITORING.HUB.CARDS.ALERTS.DESCRIPTION',
+      imageUrl: 'assets/alertas-monitoreo.png',
+      routeLink: '/monitoring/alerts',
+    },
+    {
+      titleKey: 'MONITORING.HUB.CARDS.ANALYTICS.TITLE',
+      descriptionKey: 'MONITORING.HUB.CARDS.ANALYTICS.DESCRIPTION',
+      imageUrl: 'assets/analiticas-monitoreo.png',
+      routeLink: '/monitoring/analytics',
+    },
+  ];
+
   constructor(private readonly dashboardNavigation: DashboardNavigationService) {}
 
   goToHome(): void {
