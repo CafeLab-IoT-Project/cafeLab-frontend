@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  serverBaseUrl: 'https://cafelabbackend-gmg8egarcxadh4ec.canadacentral-01.azurewebsites.net/',
+  serverBaseUrl: 'https://cafelabbackend-gmg8egarcxadh4ec.canadacentral-01.azurewebsites.net',
   coffeeLotsEndpointPath: '/api/v1/coffee-lots',
   suppliersEndpointPath: '/api/v1/suppliers',
   roastProfileEndpointPath: '/api/v1/roast-profile',
@@ -16,5 +16,7 @@ export const environment = {
   calibrationsEndpointPath: '/api/v1/calibrations',
   coastEndpointPath: '/api/v1/coast-productions',
   inventoryEndpointPath: '/api/v1/inventory-entries',
-  productionCostRecordsEndpointPath: '/api/v1/production-cost-records'
+  productionCostRecordsEndpointPath: '/api/v1/production-cost-records',
+  environmentThresholdsEndpointPath: '/api/v1/environment-thresholds',
+  telemetryRecordsEndpointPath: '/api/v1/telemetry-records',
 };

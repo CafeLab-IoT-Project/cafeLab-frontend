@@ -35,6 +35,10 @@ import { EditProfileSessionPageComponent } from './auth/presentation/views/edit-
 import { ChangePlanComponent } from './subscription/presentation/components/change-plan/change-plan.component';
 import { ConfirmChangePlanComponent } from './subscription/presentation/components/confirm-change-plan/confirm-change-plan.component';
 import { MonitoringPageComponent } from './monitoring/presentation/views/monitoring-page/monitoring-page.component';
+import { MonitoringConfigurationPageComponent } from './monitoring/presentation/views/monitoring-configuration-page/monitoring-configuration-page.component';
+import { MonitoringLotsPageComponent } from './monitoring/presentation/views/monitoring-lots-page/monitoring-lots-page.component';
+import { MonitoringAnalyticsPageComponent } from './monitoring/presentation/views/monitoring-analytics-page/monitoring-analytics-page.component';
+import { MonitoringAlertsPageComponent } from './monitoring/presentation/views/monitoring-alerts-page/monitoring-alerts-page.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -86,5 +90,25 @@ export const routes: Routes = [
   { path: 'profiles-roasting', component: RoastingPageComponent, canActivate: [AuthGuard] },
   { path: 'compare-profile', component: RoastProfileComparisonComponent, canActivate: [AuthGuard] },
   { path: 'monitoring', component: MonitoringPageComponent, canActivate: [AuthGuard] },
+  {
+    path: 'monitoring/configuration',
+    component: MonitoringConfigurationPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'monitoring/lots',
+    component: MonitoringLotsPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'monitoring/analytics',
+    component: MonitoringAnalyticsPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'monitoring/alerts',
+    component: MonitoringAlertsPageComponent,
+    canActivate: [AuthGuard],
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
