@@ -33,18 +33,9 @@
     </div>
   </div>
 
-  <div class="lot-card-actions">
-    @if (lot.status === 'critical') {
-      <button type="button" class="btn-critical" disabled>
-        {{ 'MONITORING.LOTS.ACTIVATE_COOLING' | translate }}
-      </button>
-    } @else {
-      <button type="button" class="btn-details" disabled>
-        {{ 'MONITORING.LOTS.DETAILS' | translate }}
-      </button>
-      <button type="button" class="btn-icon" disabled aria-label="Monitor">
-        <mat-icon>device_thermostat</mat-icon>
-      </button>
-    }
-  </div>
+  @if (actuatorMessageKey(); as messageKey) {
+    <div class="lot-card-actions">
+      <p class="actuator-status">{{ messageKey | translate }}</p>
+    </div>
+  }
 </article>

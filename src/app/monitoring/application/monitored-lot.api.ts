@@ -4,7 +4,10 @@ import { CoffeeLotApi } from '../../coffee-lot/application/coffee-lot.api';
 import type { CoffeeLot } from '../../coffee-lot/domain/model/coffee-lot.entity';
 import type { MonitoredLotView } from '../domain/model/telemetry-record.entity';
 import { EnvironmentThresholdApi } from './environment-threshold.api';
-import { resolveLotMonitoringStatus } from './monitoring-status.util';
+import {
+  resolveActuatorOutOfRange,
+  resolveLotMonitoringStatus,
+} from './monitoring-status.util';
 import { TelemetryRecordApi } from './telemetry-record.api';
 
 @Injectable({
@@ -38,15 +41,21 @@ export class MonitoredLotApi {
             .getByCoffeeLotId(lot.id)
             .pipe(catchError(() => of(null))),
         }).pipe(
-          map(({ latest, threshold }) => ({
-            lotId: lot.id,
-            lotName: lot.lot_name,
-            coffeeType: lot.coffee_type,
-            status: resolveLotMonitoringStatus(latest, threshold),
-            temperature: latest?.temperature ?? null,
-            humidity: latest?.humidity ?? null,
-            lastTimestamp: latest?.timestamp ?? null,
-          })),
+          map(({ latest, threshold }) => {
+            const actuatorOutOfRange = resolveActuatorOutOfRange(latest, threshold);
+
+            return {
+              lotId: lot.id,
+              lotName: lot.lot_name,
+              coffeeType: lot.coffee_type,
+              status: resolveLotMonitoringStatus(latest, threshold),
+              temperature: latest?.temperature ?? null,
+              humidity: latest?.humidity ?? null,
+              lastTimestamp: latest?.timestamp ?? null,
+              temperatureOutOfRange: actuatorOutOfRange.temperatureOutOfRange,
+              humidityOutOfRange: actuatorOutOfRange.humidityOutOfRange,
+            };
+          }),
         ),
       ),
     );

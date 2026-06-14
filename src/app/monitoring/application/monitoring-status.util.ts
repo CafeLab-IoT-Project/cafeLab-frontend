@@ -33,6 +33,32 @@ export function valueStatus(
   return 'optimal';
 }
 
+export function isValueOutOfRange(value: number, min: number, max: number): boolean {
+  return value < min || value > max;
+}
+
+export function resolveActuatorOutOfRange(
+  latest: TelemetryRecord | null,
+  threshold: EnvironmentThreshold | null,
+): { temperatureOutOfRange: boolean; humidityOutOfRange: boolean } {
+  if (!latest || !threshold) {
+    return { temperatureOutOfRange: false, humidityOutOfRange: false };
+  }
+
+  return {
+    temperatureOutOfRange: isValueOutOfRange(
+      latest.temperature,
+      threshold.minTemperature,
+      threshold.maxTemperature,
+    ),
+    humidityOutOfRange: isValueOutOfRange(
+      latest.humidity,
+      threshold.minHumidity,
+      threshold.maxHumidity,
+    ),
+  };
+}
+
 export function resolveLotMonitoringStatus(
   latest: TelemetryRecord | null,
   threshold: EnvironmentThreshold | null,

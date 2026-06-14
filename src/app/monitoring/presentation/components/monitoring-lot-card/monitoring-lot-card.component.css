@@ -64,7 +64,6 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.85rem;
-  margin-bottom: 1rem;
 }
 
 .metric-box {
@@ -98,43 +97,17 @@
 }
 
 .lot-card-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
+  margin-top: 1rem;
 }
 
-.btn-details,
-.btn-critical {
-  flex: 1;
+.actuator-status {
+  margin: 0;
   padding: 0.65rem 1rem;
   border-radius: 8px;
+  background: #fde8e8;
+  color: #b42318;
   font-family: 'Nunito', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
-  cursor: default;
-}
-
-.btn-details {
-  border: 1px solid #d5dbd8;
-  background: #ffffff;
-  color: #414535;
-}
-
-.btn-critical {
-  border: none;
-  background: #b42318;
-  color: #ffffff;
-}
-
-.btn-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid #d5dbd8;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #618985;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: default;
+  text-align: center;
 }

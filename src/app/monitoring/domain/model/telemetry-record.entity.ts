@@ -21,4 +21,6 @@ export interface MonitoredLotView {
   temperature: number | null;
   humidity: number | null;
   lastTimestamp: string | null;
+  temperatureOutOfRange: boolean;
+  humidityOutOfRange: boolean;
 }
